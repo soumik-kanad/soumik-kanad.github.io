@@ -1,12 +1,10 @@
 github_users:
-  - torvalds
-  - alshedivat
+  - soumik-kanad
 
 github_repos:
-  - alshedivat/al-folio
-  - twbs/bootstrap
-  - jekyll/jekyll
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - jpswalsh/academicons
-  - mathjax/MathJax
+  - soumik-kanad/rawlsian-gradient-descent
+  - soumik-kanad/YenKSP
+  - soumik-kanad/FeatSel
+  - soumik-kanad/8085Assignments
+  - soumik-kanad/CrowdSourcedRoadMapping
+  - soumik-kanad/SimilarMovieApi
