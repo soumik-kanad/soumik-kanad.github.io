@@ -15,7 +15,8 @@ group :jekyll_plugins do
     gem 'jekyll-toc'
     gem 'jekyll-twitter-plugin'
     gem 'jemoji'
-    gem 'mini_racer', '~> 0.4.0'
+    # gem 'mini_racer', '~> 0.4.0' # uncomment for local hosting
+    gem 'mini_racer', # use this for remote 
     gem 'unicode_utils'
     gem 'webrick'
 end
