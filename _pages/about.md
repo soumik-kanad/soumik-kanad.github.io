@@ -27,7 +27,7 @@ I'm a PhD student at the [Department of Computer Science](https://www.cs.umd.edu
 
 
 ### research 
-My research interests lie in Computer Vision and Machine Learning, especially Generative Models. I'm currently working on generative model representations, generation in implicit neural representation (INR) space and facial video generation. I have previously worked in visual forgery detection and privacy apart form various medical image analysis algorithms (ultrasound).
+My research interests lie in Computer Vision and Machine Learning, especially Generative Models. I'm currently working on generative model representations, generation in implicit neural representation (INR) space and facial video generation. I have previously worked in visual forgery detection and privacy apart from various medical image analysis algorithms (ultrasound).
 
 I am thankful for having research opportunities to work with 
 [Prof. Tianyi Zhou](https://tianyizhou.github.io/),
