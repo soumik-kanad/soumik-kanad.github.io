@@ -3,7 +3,7 @@ layout: distill
 title: Whose job will AI take first?
 description: 
 giscus_comments: true
-date: 2023-07-05
+date: 2023-07-12
 featured: true
 
 authors:
