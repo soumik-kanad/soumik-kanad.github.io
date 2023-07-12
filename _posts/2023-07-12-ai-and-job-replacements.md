@@ -74,4 +74,7 @@ I don't think this is my original thought. I definitely came across this in come
 [^2]: https://en.wikipedia.org/wiki/Evolution_of_human_intelligence
 
 [^3]: https://www.scientificamerican.com/article/the-rise-of-the-first-animals/
+
+
+
 ---
