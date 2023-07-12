@@ -81,8 +81,8 @@ I don't think this is my original thought. I came across this in a video that ha
 
 [^2]: https://en.wikipedia.org/wiki/Evolution_of_human_intelligence
 
-[^3]: https://www.scientificamerican.com/article/the-rise-of-the-first-animals/ -->
-
-
-
+[^3]: https://www.scientificamerican.com/article/the-rise-of-the-first-animals/ 
+ 
 ---
+
+-->
