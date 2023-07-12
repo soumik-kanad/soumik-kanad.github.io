@@ -35,6 +35,7 @@ bibliography: 2018-12-22-distill.bib
 #   - name: Other Typography?
 
 toc:
+  - name: tl;dr
   - name: Blue collar vs white collar
 # Below is an example of injecting additional post-specific styles.
 # If you use this post as a template, delete this _styles block.
@@ -56,17 +57,24 @@ _styles: >
 
 ---
 
+## tl;dr
+It took hundreds of times more time for locomotion to evolve than human level intelligence. Is this why it seems that creative jobs are going to be replaced by AI before physical labour jobs as the former is an easier problem to solve?
+
+
 ## Blue collar vs white collar
 
-In a simplified classification of jobs, one could categorise them into three classes - physical labour jobs, mental labour jobs, and creative jobs. There could be other categories or jobs that might not fit these categories but I think these are quite prevalent. Physical labour jobs include jobs like all the construction jobs, plumbing, electical jobs, and other physical maintenance jobs while mental labour jobs include other administrative desk jobs which do need a skill set at time but may not need creativity as such like clerical jobs, annotaters, programmers, customer service, etc. Finally, creative jobs include jobs like music, art, research, etc. where something nes is being created. 
+In a simplified classification of jobs, one could categorise them into three classes - physical labour jobs, mental labour jobs, and creative jobs. There could be other categories or jobs that might not fit these categories but I think these are quite prevalent. Physical labour jobs include jobs like construction jobs, plumbing, electrical jobs, and other physical maintenance jobs while mental labour jobs include other administrative desk jobs which do need a skill set at times but may not need creativity as such like clerical jobs, annotators, programmers, customer service, etc. Finally, creative jobs include jobs like music, art, research, etc. where something new is being created. 
 
-Scientists in the previous century thought that if we were successful in creating artificial intelligence (AI), it would take jobs in the same order of categories as I list them above<d-footnote>Need citation.</d-footnote>. But as we move closer to the middle of the 21<sup>st</sup> century, it seems that the opposite order may be more probable. Today we see that just with prompts one can create beautiful art, music, poetry but we are far away from perfectly working autonomous cars or other forms of robotics. One interesting analogy to see why that may be the case lies in evolution of human intelligence vs animal locomotion. It is noteworthy to see that human intelligence evolved only recently, for example humans started tool use only 3.5 million years (Pliocene epoch <d-footnote><a href="https://en.wikipedia.org/wiki/Evolution_of_human_intelligence">https://en.wikipedia.org/wiki/Evolution_of_human_intelligence</a></d-footnote>) ago. On the other hand locomotion in animals date back to at least 560 million years <d-footnote><a href="https://www.scientificamerican.com/article/the-rise-of-the-first-animals">https://www.scientificamerican.com/article/the-rise-of-the-first-animals/</a></d-footnote>. This shows how much evolution was required to perfect (or rather just making functional) our physical movement (with which also comes planning) while only a fraction of that time was invested in evolving human intelligence. 
+Scientists in the previous century thought that if we were successful in creating artificial intelligence (AI), it would take jobs in the same order of categories as I list them above<d-footnote>Need citation.</d-footnote>. I think this was thought because people put these categories of jobs in a hierarchy of prestige. This comes from the notion that a lot of people can work in a factory while not many can write poetry or a paper. But as we move closer to the middle of the 21<sup>st</sup> century, it seems that the opposite order may be more probable. Today we see that just with prompts one can create beautiful art, music, or poetry but we are far away from perfectly working autonomous cars or other forms of robotics. 
 
-This may not be a perfect evidence but does **points towards the possibility of creativity being an easier problem to solve than physical labour**. Even though this is not a proof of any sorts but it is a powerful idea and worth thinking about. Another reason that might have caused creatively intelligent tasks being solved before more physically skilled task maybe because of the abundance of data in the former due to internet compared to the later. But these are all speculations and only time will tell which was the actual reason.
+
+Have you ever wondered how we reached this point where more people can do physical labour than creative thinking? One interesting analogy to see why that may be the case lies in the evolution of human intelligence vs animal locomotion. It is noteworthy to see that human intelligence evolved only recently, for example, humans started using tools only 3.5 million years (Pliocene epoch <d-footnote><a href="https://en.wikipedia.org/wiki/Evolution_of_human_intelligence">https://en.wikipedia.org/wiki/Evolution_of_human_intelligence</a></d-footnote>) ago. On the other hand locomotion in animals date back to at least 560 million years <d-footnote><a href="https://www.scientificamerican.com/article/the-rise-of-the-first-animals">https://www.scientificamerican.com/article/the-rise-of-the-first-animals/</a></d-footnote>. This shows how much evolution was required to perfect (or rather just to make functional) our physical movement (with which also comes planning) while only a fraction of that time was invested in evolving human intelligence. 
+
+This may not be perfect evidence but does **point towards the possibility of creativity being an easier problem to solve than physical labour**. Even though this is not proof of any sort but it is a powerful idea and worth thinking about. Another reason that might have caused creatively intelligent tasks solved before more physically skilled tasks may be because of the abundance of data in the creative world due to the internet compared to the physical labour world. But these are all speculations and only time will tell which was the actual reason.
 
 
 ### Acknowledgements
-I don't think this is my original thought. I definitely came across this in come video that had an Youtuber called [Varun Mayya](https://www.youtube.com/@VarunMayya). I tried finding it but could find it given the abundance of these short form videos these days. 
+I don't think this is my original thought. I came across this in a video that had a Youtuber called [Varun Mayya](https://www.youtube.com/@VarunMayya). I tried finding it but could find it given the abundance of these short-form videos these days. 
 
 <!-- 
 [^1]: Need citation.
