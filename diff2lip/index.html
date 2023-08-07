@@ -50,6 +50,25 @@
   <script src="./static/js/index.js"></script>
   
 
+
+<style>
+  ol#horizontal_list li {
+    display:inline;
+  }
+
+
+ol.horizontal{
+    list-style-type: decimal;
+    width: 600px;
+}
+
+ol.horizontal li{
+    float: left;
+    width: 200px;
+    padding: 2px 0px;
+}
+</style>
+
   
 </head>
 <body>
@@ -225,11 +244,44 @@
     <!-- Paper video. -->
     <div class="hero-body">
       <h2 class="subtitle has-text-centered">
+<!-- 
+        <ol id="horizontal_list" type="a">
+          <li>Coffee</li>
+          <li>Tea</li>
+          <li>Milk</li>
+        </ol> -->
+
+
+
+
+
+<!-- <ol class="horizontal" type="a">
+    <li>Test</li>
+    <li>Test</li>
+    <li>Test</li>
+</ol>
+<br> -->
         <!-- <pre>(a) Video Source         (b) Wav2Lip          (c) PC-AVS          (d) Diff2Lip (ours)</pre> -->
-        (a) Video Source &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        (b) Wav2Lip [1] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        (c) PC-AVS [2] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        (d) Diff2Lip (ours)
+<div class="columns is-centered">
+  <div class="column">
+    &nbsp;&nbsp;&nbsp;&nbsp;(a) Video Source
+  </div>
+  <div class="column">
+    &nbsp;&nbsp;&nbsp;&nbsp;(b) Wav2Lip [1] 
+  </div>
+  <div class="column">
+    (c) PC-AVS [2]
+  </div>
+  <div class="column">
+    (d) Diff2Lip (ours)&nbsp;&nbsp;&nbsp;&nbsp;
+  </div>
+</div>
+
+        <!-- &nbsp;&nbsp;
+        (a) Video Source &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (b) Wav2Lip [1] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (c) PC-AVS [2] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (d) Diff2Lip (ours)&nbsp;&nbsp; -->
       </h2>
       <video id="teaser" autoplay muted loop playsinline height="100%">
         <!-- "./static/website_videos/id00419.1zffAxBod_c.00001_id04570.0YMGn6BI9rg.00001.mp4" -->
@@ -319,11 +371,25 @@
     <h2 class="title is-3 has-text-centered">More Video Comparisons</h2>
 
     <h2 class="subtitle has-text-centered">
+      <div class="columns is-centered">
+  <div class="column">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(a) Video Source
+  </div>
+  <div class="column">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(b) Wav2Lip [1] 
+  </div>
+  <div class="column">
+    (c) PC-AVS [2]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </div>
+  <div class="column">
+    (d) Diff2Lip (ours)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </div>
+</div>
       <!-- <pre>(a) Video Source         (b) Wav2Lip          (c) PC-AVS          (d) Diff2Lip (ours)</pre> -->
-      (a) Video Source &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <!-- (a) Video Source &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       (b) Wav2Lip [1] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       (c) PC-AVS [2] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      (d) Diff2Lip (ours)
+      (d) Diff2Lip (ours) -->
     </h2>
     <div class="hero-body" id="website_videos">
       <!-- <video id="website_videos" autoplay muted loop playsinline height="100%">
