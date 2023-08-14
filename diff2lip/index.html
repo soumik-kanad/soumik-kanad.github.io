@@ -67,6 +67,109 @@ ol.horizontal li{
     width: 200px;
     padding: 2px 0px;
 }
+
+/*
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+/*.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 240px;
+  background-color: rgb(57, 57, 57);
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  position: absolute;
+  z-index: 1;
+  font-size: 14px;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%; 
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+*/
+
+.tooltip {
+  display:inline-block;
+  position:relative;
+  border-bottom:1px dotted #666;
+  text-align:left;
+}
+
+.tooltip h3 {margin:12px 0;}
+
+.tooltip .right {
+  min-width:200px;
+  max-width:400px;
+  top:50%;
+  left:100%;
+  margin-left:20px;
+  transform:translate(0, -50%);
+  padding:0;
+  color:#EEEEEE;
+  background-color:#444444;
+  font-weight:normal;
+  font-size:13px;
+  border-radius:8px;
+  position:absolute;
+  z-index:99999999;
+  box-sizing:border-box;
+  box-shadow:0 1px 8px rgba(0,0,0,0.5);
+  visibility:hidden; opacity:0; transition:opacity 0.8s;
+}
+
+.tooltip:hover .right {
+  visibility:visible; opacity:1;
+}
+
+.tooltip .right img {
+  width:400px;
+  border-radius:8px 8px 0 0;
+}
+.tooltip .text-content {
+  padding:10px 20px;
+}
+
+.tooltip .right i {
+  position:absolute;
+  top:50%;
+  right:100%;
+  margin-top:-12px;
+  width:12px;
+  height:24px;
+  overflow:hidden;
+}
+.tooltip .right i::after {
+  content:'';
+  position:absolute;
+  width:12px;
+  height:12px;
+  left:0;
+  top:50%;
+  transform:translate(50%,-50%) rotate(-45deg);
+  background-color:#444444;
+  box-shadow:0 1px 8px rgba(0,0,0,0.5);
+}
+
+
 </style>
 
   
@@ -172,16 +275,16 @@ ol.horizontal li{
                   <span>Videos</span>
                 </a>
               </span>
-<!--              <!~~ Code Link. ~~>
+             <!-- Code Link. -->
               <span class="link-block">
-                <a href=""
+                <a href="https://github.com/soumik-kanad/diff2lip.git"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
                   <span>Code</span>
                   </a>
-              </span>-->
+              </span>
 <!--              <!~~ Dataset Link. ~~>
               <span class="link-block">
                 <a href=""
@@ -231,7 +334,35 @@ ol.horizontal li{
 <section class="section">
   <div class="container  is-max-desktop has-text-centered">
     <!-- <div class="hero-body has-text-centered"> -->
-      <h2 class="title is-3">Overview</h2>
+      <!-- <h2 class="title is-3">Overview</h2> -->
+      <h2 class="title is-3">tl;dr</h2>
+      <!-- <h2 class="subtitle has-text-centered">
+        <span class="dnerf">Diff2Lip</span> combines <b>arbitrary speech</b> with <b>face videos</b> to provide <b>high quality lip-sync</b> which has numerous applications in <b>movies</b>, <b>education</b>, <b>virtual avatars</b>, and 
+        <b>video conferencing
+          <div class="tooltip">
+            <sup>*</sup>
+            <div class="right">
+              <div class="text-content">
+                Diff2Lip is not real time yet but we are hopeful that future version will be.
+              </div>
+              <i></i>
+            </div>
+          </div></b>.
+      </h2> -->
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf"><b>Diff2Lip</b>:</span> <b>arbitrary speech</b> + <b>face videos</b> → <b>high quality lip-sync</b>.<br>
+            Applications: <b>movies</b>, <b>education</b>, <b>virtual avatars</b>, 
+            <b>(eventually) video conferencing
+              <div class="tooltip">
+                <sup>*</sup>
+                <div class="right">
+                  <div class="text-content">
+                    Diff2Lip is not real time yet but we are hopeful that future versions will be.
+                  </div>
+                  <i></i>
+                </div>
+              </div></b>.
+      </h2>
       <video id="teaser" autoplay muted loop playsinline height="100%" controls>
         <source src=
                 
@@ -472,7 +603,7 @@ ol.horizontal li{
     <!-- Animation. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Diffusion Processn Visualization</h2>
+        <h2 class="title is-3">Diffusion Process Visualization</h2>
 
         <!-- Interpolating. -->
         <h3 class="title is-4">Intermediate States</h3>
