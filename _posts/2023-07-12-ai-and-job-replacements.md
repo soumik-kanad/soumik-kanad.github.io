@@ -1,6 +1,6 @@
 ---
 layout: distill
-title: Whose job will AI take first?
+title: AI vs Jobs?
 description: 
 giscus_comments: true
 date: 2023-07-12
@@ -56,6 +56,8 @@ _styles: >
   }
 
 ---
+
+Have you ever wondered which kinds of jobs are easier to automate? For example, with the advent of the Industrial Revolution, electro-mechanical machines could automate a lot of repetitive ("non-intelligent") physical labour. Similarly, computers have automated a lot of computations that were done by hand in the olden days. Now, as we see how powerful AI can be, the next question is which kinds of automation will it aid? There are multiple ways to make this prediction and this blog talks about one such point of view. I would like to emphasise that this might not be the right answer but it is definitely an interesting one. 
 
 ## tl;dr
 It took hundreds of times more time for locomotion to evolve than human level intelligence. Is this why it seems that creative jobs are going to be replaced by AI before physical labour jobs as the former is an easier problem to solve?
