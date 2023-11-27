@@ -2,6 +2,7 @@ github_users:
   - soumik-kanad
 
 github_repos:
+  - soumik-kanad/diff2lip
   - soumik-kanad/rawlsian-gradient-descent
   - soumik-kanad/YenKSP
   - soumik-kanad/FeatSel
