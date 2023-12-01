@@ -45,15 +45,24 @@ selected={true},
 preview={needle-detection.png}
 }
 
-@article{mukhopadhyay2023diffusion2,
+@article{mukhopadhyay2023textfree,
 title={Do text-free diffusion models learn discriminative visual representations?}, 
 author={Soumik Mukhopadhyay* and Matthew Gwilliam* and Yosuke Yamaguchi and Vatsal Agarwal and Namitha Padmanabhan and Archana Swaminathan and Tianyi Zhou and Abhinav Shrivastava},
 year={2023},
 journal={Under Review},
-pdf = {DiffusionSelfSup.pdf},
+eprint={2311.17921},
+archivePrefix={arXiv},
+primaryClass={cs.CV},
+abstract={While many unsupervised learning models focus on one family of tasks, either generative or discriminative, we explore the possibility of a unified representation learner: a model which addresses both families of tasks simultaneously. We identify diffusion models, a state-of-the-art method for generative tasks, as a prime candidate. Such models involve training a U-Net to iteratively predict and remove noise, and the resulting model can synthesize high-fidelity, diverse, novel images. We find that the intermediate feature maps of the U-Net are diverse, discriminative feature representations. We propose a novel attention mechanism for pooling feature maps and further leverage this mechanism as DifFormer, a transformer feature fusion of features from different diffusion U-Net blocks and noise steps. We also develop DifFeed, a novel feedback mechanism tailored to diffusion. We find that diffusion models are better than GANs, and, with our fusion and feedback mechanisms, can compete with state-of-the-art unsupervised image representation learning methods for discriminative tasks - image classification with full and semi-supervision, transfer for fine-grained classification, object detection and segmentation, and semantic segmentation. },
+pdf = {https://arxiv.org/pdf/2311.17921.pdf},
+doi = {10.48550/arXiv.2311.17921},
+arxiv = {2311.17921},
+website = {https://mgwillia.github.io/diffssl/},
 selected = {true},
 preview = {diffssl2.png},
+code={https://github.com/soumik-kanad/diffssl}
 }
+
 
 @article{mukhopadhyay2023diff2lip,
 title={Diff2Lip: Audio Conditioned Diffusion Models for Lip-Synchronization}, 
