@@ -82,7 +82,7 @@ Study](https://www.ajer.org/papers/Vol-9-issue-7/K09078792.pdf) which was writte
 {% include figure.html path="assets/img/blog/paper_screenshot.png" class="img-fluid rounded z-depth-1" %}
 
 
-For a second, even if I were to stop questioning this journal and the credential of the author, and go into paper itself, it still has problems. The sutras (principles) being talked about in the paper don't even exist in [The Vaisheshika Sutras of Kanada](https://indianculture.gov.in/rarebooks/vaisesika-sutras-kanada-commentary-sankara-misra-and-extracts-gloss-jayanarayana). Yes, I checked and none of the sutras start with the word "Vegah" (वेगः meaning impetus). After some reverse engineering I found a [2013 webpage with identical sutras](https://www.booksfact.com/science/ancient-science/vaishesika-sutras-by-kanada-describe-laws-of-motion-concept-of-atom.html) and a [2018 quora question](https://www.quora.com/Did-Newton-take-three-laws-of-motion-from-Ancient-Indian-scriptures) (which probably also picked these up from the former) which have these sutras.
+For a second, even if I were to stop questioning this journal and the credential of the author, and go into the paper itself, it still has problems. The sutras (principles) being talked about in the paper don't even exist in [The Vaisheshika Sutras of Kanada](https://indianculture.gov.in/rarebooks/vaisesika-sutras-kanada-commentary-sankara-misra-and-extracts-gloss-jayanarayana). Yes, I checked and none of the sutras start with the word "Vegah" (वेगः meaning impetus). After some reverse engineering I found a [2013 webpage with identical sutras](https://www.booksfact.com/science/ancient-science/vaishesika-sutras-by-kanada-describe-laws-of-motion-concept-of-atom.html) and a [2018 quora question](https://www.quora.com/Did-Newton-take-three-laws-of-motion-from-Ancient-Indian-scriptures) (which probably also picked these up from the former) which have these sutras.
 
 <b>This means that someone made these up and others are propagating this misinformation to the extent that someone published it in a questionable journal and someone else used that paper to bolster their claim in a video. </b>
 There is already so much misinformation and "already discovered in ancient India" claims don't help stuff that were actually discovered in ancient India. People have started considering "already discovered in ancient India" as a joke.  
@@ -95,7 +95,7 @@ The answer to that is yes, and no. I did come across an insightful blog by [Dr. 
 
 {% include figure.html path="assets/img/blog/blog_screenshot.png" class="img-fluid rounded z-depth-1" %}
 
-I also found a comment in the quora question's answers which did point to exact sutras corresponding to each of the laws:
+I also found a [comment in the quora question's answers](https://www.quora.com/Did-Newton-take-three-laws-of-motion-from-Ancient-Indian-scriptures/answer/Abdul-Azarudeen-1?comment_id=182815984&comment_type=2) which did point to exact sutras corresponding to each of the laws:
 ### 1st law
 
 {% include figure.html path="assets/img/blog/1st_law.png" class="img-fluid rounded z-depth-1" %}
