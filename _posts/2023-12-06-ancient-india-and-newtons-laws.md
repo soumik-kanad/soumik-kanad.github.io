@@ -37,7 +37,7 @@ bibliography: 2018-12-22-distill.bib
 toc:
   - name: tl;dr
   - name: Validity of the Video
-  - name: Were Newton's Laws of Motion discovered by Kanada first?
+  - name: Were Newtons Laws of Motion discovered by Kanada first?
 # Below is an example of injecting additional post-specific styles.
 # If you use this post as a template, delete this _styles block.
 _styles: >
