@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: "<b>PhD student</b>, PI Lab, <a href='https://www.cs.umd.edu/'>University of Maryland</a>.  <br><b>Previously</b>: <a href='amazonstudios.com'> Amazon Studios</a> | <a href='https://research.samsung.com/sri-b'> Samsung Reasearch</a> | <a href='https://iitg.ac.in/'>IIT Guwahati</a>. <br> Find me @ IRB3116, UMD."
+subtitle: "<b>PhD student</b>, PI Lab, <a href='https://www.cs.umd.edu/'>University of Maryland</a>.  <br><b>Previously</b>: <a href='https://research.adobe.com/person/eli-shechtman/'> Adobe Research</a> | <a href='https://press.amazonmgmstudios.com/us/en'> Amazon Studios</a> | <a href='https://research.samsung.com/sri-b'> Samsung Reasearch</a> | <a href='https://iitg.ac.in/'>IIT Guwahati</a>. <br> Find me @ IRB3116, UMD."
 
 profile:
   align: right
