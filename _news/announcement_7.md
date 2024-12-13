@@ -6,4 +6,4 @@ related_posts: false
 ---
 
 <!-- [Diff2Lip](https://soumik-kanad.github.io/diff2lip/) got accepted at WACV2024. -->
-Selected for Kulkarni Summer Research Fellowship! 
+Selected for Kulkarni Summer Research Fellowship (Declined)! 
