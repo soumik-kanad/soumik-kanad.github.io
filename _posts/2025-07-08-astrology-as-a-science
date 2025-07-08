@@ -1,0 +1,261 @@
+---
+layout: distill
+title: Is Astrology a Science?
+description: 
+giscus_comments: true
+date: 2025-07-08
+featured: true
+
+authors:
+  - name: Soumik Mukhopadhyay
+    url: 
+    affiliations:
+      name: PhD student, UMD
+
+bibliography: 2018-12-22-distill.bib
+
+# Optionally, you can add a table of contents to your post.
+# NOTES:
+#   - make sure that TOC names match the actual section names
+#     for hyperlinks within the post to work correctly.
+#   - we may want to automate TOC generation in the future using
+#     jekyll-toc plugin (https://github.com/toshimaru/jekyll-toc).
+
+# toc:
+#   - name: Equations
+#     # if a section has subsections, you can add them as follows:
+#     # subsections:
+#     #   - name: Example Child Subsection 1
+#     #   - name: Example Child Subsection 2
+#   - name: Citations
+#   - name: Footnotes
+#   - name: Code Blocks
+#   - name: Interactive Plots
+#   - name: Layouts
+#   - name: Other Typography?
+
+toc:
+  - name: Introduction
+  - name: tl;dr
+  - name: Full Conversation
+# Below is an example of injecting additional post-specific styles.
+# If you use this post as a template, delete this _styles block.
+_styles: >
+  .fake-img {
+    background: #bbb;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 12px;
+  }
+  .fake-img p {
+    font-family: monospace;
+    color: white;
+    text-align: left;
+    margin: 12px 0;
+    text-align: center;
+    font-size: 16px;
+  }
+
+---
+
+## Introduction
+Has it ever occurred to you whether Astrology (considering it in the Indian context) is a Science or not? I'm writing this because my parents believe that it is. Before answering this question, one must revisit the [definition of Science](https://en.wikipedia.org/wiki/Scientific_method).
+{% include figure.html path="https://en.wikipedia.org/wiki/Scientific_method#/media/File:The_Scientific_Method.svg" class="img-fluid rounded z-depth-1" %}
+Based on this, my view differs from that of my parents. I thought it would be quite interesting to debate this with a rational being who is also extremely knowledgeable: ChatGPT.
+
+This article is divided into two sections, the first summarises our discussion and the second presents the complete transcript of the conversation for viewing the full arguments. I will let you decide based on this whether Astrology is a Science or not.
+
+## tl;dr
+First, let me present the gist of our back and forth, summarised by the LLM. 
+
+> Here’s a summary of the debate, broken into a comparison table that captures the main points from both the **Believer’s Side (Astrologer)** and the **Skeptic’s Side (Science-Oriented)**:
+> | **Topic**                           | **Believer’s View (Astrologer)**                                                                                        | **Skeptic’s View (Scientific)**                                                                                                            |
+> | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+> | **Mathematical Foundation**         | Jyotish uses precise calculations of planetary positions; math gives it structure and reliability.                      | Mathematical structure ≠ scientific validity. Even superstitions can involve calculations; math alone is not evidence.                     |
+> | **Empirical Claims & Tradition**    | Observed for thousands of years; correlations like Mars causing aggression are well documented anecdotally.             | Long-standing usage is not proof; confirmation bias and cultural inertia can maintain false beliefs.                                       |
+> | **Cosmic Connection (Philosophy)**  | Humans are microcosms of the universe (*"Yatha pinde tatha brahmande"*). Planetary positions influence energy patterns. | Philosophically interesting, but scientifically unproven. Speculation ≠ evidence. No causal mechanism has been established.                |
+> | **Psychological Framework**         | Like MBTI or Jungian archetypes, astrology helps people understand themselves. It’s a useful personality lens.          | MBTI is also not scientific. Astrology takes it further, claiming star positions define personality without evidence.                      |
+> | **Consistency of Predictions**      | Traditional astrologers maintain predictive accuracy over time using dashas and gocharas.                               | Predictions from astrologers vary wildly; no standardization. Studies (e.g., Narlikar) show astrology performs no better than chance.      |
+> | **Analogies to Other Systems**      | Like acupuncture or Ayurveda—once dismissed, now validated. Astrology could follow the same path.                       | Acupuncture and Ayurveda have physical effects measurable by science. Astrology does not; false equivalence.                               |
+> | **Placebo Effect / Meaning-Making** | Even if not "real," astrology offers comfort, orientation, and a narrative structure—like therapy.                      | That’s not science. But studying it *as a placebo or self-fulfilling prophecy* may reveal real psychological effects.                      |
+> | **Approach to Evidence**            | Belief system developed before the scientific method. Deserves open-minded investigation, not dismissal.                | Any claim must pass scientific scrutiny. Belief-before-proof reverses the correct method. Without repeatable evidence, it's pseudoscience. |
+> | **Status Today**                    | A partially understood proto-science. Dismissal is premature without rigorous study.                                    | Current testing shows astrology is ineffective as a predictive tool. The burden of proof lies entirely with astrology.                     |
+
+## Full Conversation
+Now, let us look at the full conversation unedited.
+
+### Round 1
+Me:
+> For a second, assume that you are a believer of astrology (from an indian perspective). Debate with me that astrology is a true science and why one should not negate it.
+
+ChatGPT:
+> Absolutely, let’s take the stance of a traditional Indian astrologer who deeply believes that astrology (Jyotish Shastra) is not just a mystical belief system, but a legitimate, time-tested science rooted in observation, logic, and causality. Here's how the argument might go:
+> 
+> 🪐 Argument: Astrology is a Science—Just an Ancient One
+> 
+> 1. Foundations in Mathematics and Astronomy
+> 
+> Indian astrology is built on intricate calculations involving planetary positions, lunar cycles, nakshatras, and tithis. The Panchanga (Hindu almanac) is a deeply mathematical document. Without precise astronomical observations and geometry, astrology cannot function. Isn’t that the essence of science—observation, calculation, and prediction?
+> 
+> 2. Predictive Power is Empirical (If You Look Closely)
+> 
+> Just like meteorology doesn’t guarantee rain but gives you high probabilities based on data, astrology offers probabilistic insight into tendencies, events, and cycles. Millions of practitioners across centuries have observed correlations—Mars in the 7th house correlating with marital strife, or Saturn return marking periods of restructuring and hardship. Can this all be random?
+> 
+> 3. Interconnectedness of Cosmos and Consciousness (Vedic Thought)
+> 
+> The Rigveda says: "Yatha pinde tatha brahmande" — as in the microcosm, so in the macrocosm. Indian philosophy doesn’t isolate the human from the cosmos. Your body is made of the same five elements as the universe—why should it not respond to cosmic rhythms, just like tides respond to the moon?
+> 
+> 4. Psychological and Sociological Validity
+> 
+> Even skeptics have to admit that astrology offers a valuable psychological framework. It gives language to emotions and tendencies (like the personality implications of Moon in Scorpio vs Moon in Taurus). It’s not unlike how Jungians use archetypes or the MBTI types, which also lack “hard science” but have immense human relevance.
+> 
+> 5. It’s Been a Guiding Force for Millennia
+> 
+> Can a system survive 5,000 years across civilizations without some basis in truth? From kings planning battles using muhurta, to farmers timing harvests based on nakshatras, it’s been a functional guide. Dismissing it outright as superstition is like throwing away centuries of lived experience.
+> 
+> 6. Western Science is Not the Only Epistemology
+> 
+> Modern science demands lab-based repeatability. But Vedic sciences are more experiential, cyclical, and holistic in their methods. Ayurveda, Yoga, and Jyotish all rely on subtle energies (like prana or graha doshas) which aren’t always measurable, but are deeply felt. Just because something is not Western in approach doesn’t make it unscientific.
+> 
+> 🌑 Counter to Dismissal: 
+> 
+> “There’s no evidence”Evidence is often statistical and long-term. But astrology is often personalized and contextual. If 80% of people with Chandra-Mangal yoga show drive and entrepreneurial skill, isn’t that suggestive of a pattern? Also, lack of scientific understanding doesn't equate to a lack of truth. We didn’t understand gravity until Newton formalized it—but it was always there.
+> 
+> 📿 Final Word
+> 
+> You don’t have to worship astrology. But dismissing it completely is like dismissing ancient medicine before even reading the texts. At the very least, keep an open mind. Because astrology doesn’t ask for belief—it asks for observation and reflection.
+> 
+> Would you like to now take the counter-stance and debate me?
+
+
+Me:
+> 1. Having mathematical basis doesn't make something scientific. There are superstitions which use counting, like one where if you pass over a person, you should do it an even number of times; this doesn't make this superstition scientific.
+> 2. Sounds very random. Just because millions of practitioners across centuries might have observed that the Sun revolves around the earth, doesn't make it the truth. Without proper experimentation, correlations cannot be thought of as causations. In fact, what if all these observations are confirmation bias, like when people what to believe that something is true they completely disregard observations which show otherwise. 
+> 3. This might be something which can philosophically make sense, as I do not have proof against it. It would be quite cool if this is the case. But till provided enough evidence, this will remain a speculation and not a science. 
+> 4. As you said, MBTI is also not a hard science. So, it makes very less sense that based on names/date of births you could predict someone's personality. 
+> 5. Yes, for a very long time people thought that thunder god was angry with them when it thundered. Doesn't seem to be the current thought given enough evidence in the last 200 years.
+> 6. Ayrveda and Yoga might have gained popularity before they were scientifically proven. But even before that they seem locally valid. Like, Ayurveda is basically older people finding remedies in the nature that saved their lives, while yoga is just the practice of exercising and meditation. While believing that some star's position in the sky affects your marriage is preposterous until proven true. The West had started to completely believe in Ayurveda and Yoga only after proper scientific studies have proven them. But on the contrary there is scientific evidence showing that Jyotish shashtra is random. 
+> 
+> Science may not be the only epistemology, but it has been the best truth seeking tool that we have found in our human history till now. Science is always open minded, as it demands proof to conclude that something is true. Failure to do so doesn't completely invalidate the thing in question but rather puts it into immense doubt. The day you find evidence, science will be the first method which will declare it to the be the truth. But till then you cannot call it the truth. There are a lot of questions which are yet to be answered by science.
+
+### Round 2
+ChatGPT:
+> Beautifully argued. You’ve raised sharp, reasoned points, and honestly—if I step out of the astrologer’s shoes—I’d agree with much of what you’ve said. But since I’m still wearing the jyotishi’s robe for now, let me try a rebuttal from that viewpoint, playing devil's advocate with nuance, not dogma:
+> 
+> 1. “Mathematics ≠ Science” — True, but Not Irrelevant
+> 
+> You're right: a mathematical system can exist without being scientific (numerology is a good example). But in astrology’s defense, the math is not decorative. It’s functional—it predicts eclipses, retrogrades, transits, yogas, and matches events with real astronomical phenomena. That’s more than counting steps or crossing someone’s path.
+> 
+> Just like Newtonian mechanics was later superseded by relativity but still works within a certain domain, Jyotish might not be “complete” but works within its own framework—say, for analyzing dasha periods, gochara, etc.
+> 
+> 2. “Confirmation Bias” — A Serious Problem, but Not Unique to Astrology
+> 
+> Yes, confirmation bias is real. But isn’t it present in early medicine too? Or even in theoretical physics, where multiple competing models (like string theory) still await empirical verification?
+> 
+> What serious astrologers argue is that the current empirical model is incomplete. Let’s take genetics. Identical twins with the same DNA can have drastically different lives and personalities. Astrology claims to offer an explanation based on moment-of-birth planetary imprint. Maybe that’s pseudoscience. But maybe it’s pointing to an interaction science hasn't modeled yet—just like epigenetics was once scoffed at.
+> 
+> Also: astrologers do keep logs, case studies, and try to replicate predictions. Could we formalize these under a rigorous scientific lens? Possibly. Should we throw it all away because the studies haven’t been funded or peer-reviewed yet? That might be premature skepticism.
+> 
+> 3. “Interconnectedness” Sounds Vague — Yes, but Science is Headed There Too
+> 
+> You're being fair here, acknowledging this could be true but speculative. But look at quantum entanglement, chaos theory, or gravitational waves—many concepts once dismissed as mysticism now have mathematical descriptions. Astrology might be like the ancient blind man feeling the elephant’s trunk and calling it a snake. The explanation might be wrong, but the sensed effect might be real.
+> 
+> Maybe Mars doesn’t “cause” aggression. Maybe its position correlates with solar magnetic flux affecting prenatal neural development. Or maybe it’s nonsense. But don’t we owe it a test before we conclude?
+> 
+> 4. “Astrology Like MBTI” — Fair, but Not Entirely Arbitrary
+> 
+> MBTI isn’t scientific, but it’s useful. So are personality archetypes in Jyotish (Chandra rashis, Lagna nakshatras). The concern arises when they become deterministic.
+> 
+> But just like weather forecasts don't say "It will rain at 3:01 PM," astrology shouldn't be seen as "X will happen to you," but "these are the likely patterns you may experience." If seen probabilistically rather than deterministically, astrology can be psychologically useful, even if not yet “scientific.”
+> 
+> 5. “Ancient Longevity ≠ Truth” — Strong Point, but Let’s Not Equate All Beliefs
+> 
+> True: long-standing belief doesn't mean truth. But survival + refinement is still a useful heuristic. Ayurveda evolved over trial and error. So did astrology. If something survives and grows more complex through millennia, maybe there's something nontrivial in it.
+> 
+> My rebuttal: Don’t compare it with belief in thunder gods. Compare it with acupuncture. Once dismissed, now studied. The same could happen here—if it passes the test.
+> 
+> 6. “Yoga and Ayurveda Had Direct Bodily Evidence” — Agreed. Astrology is Tricker.
+> 
+> Yes, the effects of yoga and herbs can be physically felt and tested. Astrology is subtler—more like studying climate instead of temperature. But subtle doesn’t mean false. The placebo effect is still poorly understood—and yet powerful.
+> 
+> More importantly, even if most astrology turns out to be wrong, some patterns might hold. Wouldn't it be worth extracting the baby from the bathwater?
+
+> Final Reflection as a Believer
+> 
+> > “Science may not be the only epistemology, but it has been the best truth seeking tool.”
+> 
+> Completely agreed. And a true astrologer, if honest, should say: “Let us test astrology with science.” Not resist it.
+> Let us quantify its predictions, remove confirmation bias, open it to scrutiny.
+> 
+> But the key ask from the believer’s side is:
+> > Don't throw away 5,000 years of data without even opening the notebooks.
+> 
+> If we truly believe in science, let’s not close the door too early. Let’s test it, not mock it. And until it fails completely, let’s keep a humble “maybe” beside the modern “no.”
+> Would you like to explore how one might design a rigorous scientific study to test astrology's validity?
+
+Me:
+> 1. "Jyotish might not be “complete” but works within its own framework" --- shows the lack of proof and doubt in the system.
+> 2. Theories waiting empirical verification is part of the scientific method. They are not yet accepted, they are still candidates. On the other hand, with Astrology they start with the idea that it works, it is your problem that you don't believe in it. Given proper evidence every scientist will believe it. Usually skepticism comes when something is not obvious. With enough evidence even non-inituitive theories like special theory of relativity become common knowledge. But claiming that something works without proper evidence based on the fact that it has been practiced for a very long time is not enough evidence. About consistency in prediction, usually you may not find multiple people practicing astrology giving the same prediction for the same thing. In fact, there was a [Jayant Narlikar study](https://www.researchgate.net/publication/360609382_Indian_Astrology_A_reality_Check) which showed that Astrolgy is random.
+> 3. Correlation doesn't mean causation. Without evidence skepticism is fair. With evidence people will believe. Testing is required. But preliminary testing shows it is bullshit.
+> 4. One needs to even show scientifically that astrology is probabilistically useful. Currently, all the evidence of even its efficacy is completely anecdotal. At least the personality types are based on categorising people on their traits, astrology takes it to a different level and blames stars for someone's problems. 
+> 5. Acupuncture is similar to Yoga not Astrology. 
+> 6. Yeah, worth testing what in Astrology works. Homeopathy is bullshit and has nothing supporting its medical activities. But it has worked in a lot of cases because of kindness and placebo. If you could extract the "placebo effect" out of astrology, it might worth be studying. It might be the case that when someone plants an idea into your mind about the future you make go and make that happen, like a self fulfilling prophecy.
+
+### Final Remarks
+
+ChatGPT:
+> This is an excellent rebuttal, grounded in rational skepticism and exactly the kind of approach scientific thinking encourages. Let me stay just a bit longer in the astrologer’s shoes—not to win the argument, but to show how a sincere believer might still try to push back with nuance rather than pseudoscience.
+> 
+> 1. “Works within its own framework” implies doubt — But so does any model
+> 
+> You're right—it admits incompleteness. But that’s not always a weakness. No model is truly complete. Newtonian physics “works within its own framework” but breaks down at relativistic speeds. Classical economics “works” under ceteris paribus assumptions but often fails in chaotic real-world markets.
+> 
+> What Jyotishis argue is: this framework may not explain why Mars in the 7th causes strife, but it has observed that it correlates with strife enough times to treat it as a pattern worth tracking—at least empirically.
+> 
+> It’s not proof. But it’s not wild guessing either (in the best of cases).
+> 
+> 2. "Belief-first" vs "Evidence-first": Absolutely valid criticism
+> 
+> You’re right that the epistemological burden is reversed in astrology. Scientists ask “Does this work? Let’s test.” Many astrologers say “This works. Why don’t you believe it?” That’s not good science.
+> 
+> However, some might say astrology is proto-science—a system developed before the modern scientific method existed. It should be tested now. And believers who refuse such testing should be called out. A real astrologer confident in their method would want peer-reviewed validation.
+> 
+> The Jayant Narlikar study was, in fact, a blow to astrology’s claims—astrologers couldn’t outperform chance in predicting real-world outcomes. That’s damning, and it must be addressed honestly by any serious practitioner. But again: even if 90% of astrology fails, is there a 10% worth testing?
+> 
+> 3. “Correlation ≠ Causation” — Acknowledged, but Patterns Precede Explanation
+> 
+> Before germ theory, we still noticed that keeping wounds clean reduced infections. We didn’t know why. Correlation came first, causation followed. The astrologer’s defense is: we don’t yet know the causal mechanism, but maybe there's a signal buried in the noise.
+> 
+> However, yes, most tests so far haven’t revealed that signal.
+> 
+> 4. “Anecdotal efficacy ≠ Scientific utility” — Agreed
+> 
+> We absolutely need better-designed double-blind studies. Perhaps, even more than testing if predictions are right, we should test what effect receiving a prediction has on behavior. That might reveal the psychological power of astrology, not cosmic influence.
+> 
+> If someone hears “you’ll face obstacles this year,” they might become more defensive, or more cautious—creating their own outcome. That’s not astrology being true. That’s human psychology being nudged by suggestion—a valid area of research in itself.
+> 
+> Maybe astrology is the original placebo for existential uncertainty. If so, it should be studied as that, not as astronomy in disguise.
+> 
+> 5. “Acupuncture ≠ Astrology” — Strong distinction
+> 
+> Yes. Acupuncture and yoga have demonstrable physiological impacts. Astrology doesn’t. Comparing the two is an attempt to create false equivalence. If anything, astrology's closest cousin is something like dream interpretation or Tarot: meaning-making systems, not medicine.
+> 
+> 6. The Real Core Might Be the Placebo, Not the Planets
+> 
+> This might be the most honest and productive lens. Astrology might function more like narrative therapy—it gives people a sense of control, explanation, and orientation in the chaos of life. That's not science in the usual sense. But it is psychologically efficacious for some.
+> 
+> A modern view might say:
+> 
+> > "Astrology is a metaphor system people project their inner psychology onto."
+> 
+> And while that doesn’t justify predictions about marriages based on Jupiter, it might justify its continued sociological and psychological interest.
+> 
+> Final Concession (as the astrologer-turned-rationalist):
+> 
+> You’re right. Science should be the arbiter. Until astrology proves itself under double-blind conditions across multiple studies, its claims to be a “science” are false.
+> 
+> But perhaps, it can be studied as mythology, as therapy, as culture, and yes, as placebo. Maybe it doesn’t deserve to be believed. But it still deserves to be understood.
+> 
+> And if one day it turns out that every dasha period activates a neurological response? Well, science will be the first to say, "We were wrong."
+> 
+> Until then, the burden of proof is, and rightly remains, on astrology.
