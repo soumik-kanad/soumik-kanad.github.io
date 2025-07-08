@@ -61,7 +61,6 @@ _styles: >
 ## Introduction
 Has it ever occurred to you whether Astrology (considering it in the Indian context) is a Science or not? I'm writing this because my parents believe that it is. Before answering this question, one must revisit the [definition of Science](https://en.wikipedia.org/wiki/Scientific_method).
 
-<!-- {% include figure.html path="https://en.wikipedia.org/wiki/Scientific_method#/media/File:The_Scientific_Method.svg" class="img-fluid rounded z-depth-1" %} -->
 
 <!-- ![Scientific Method](https://upload.wikimedia.org/wikipedia/commons/8/82/The_Scientific_Method.svg) -->
 
