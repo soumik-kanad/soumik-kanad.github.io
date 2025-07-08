@@ -63,7 +63,13 @@ Has it ever occurred to you whether Astrology (considering it in the Indian cont
 
 {% include figure.html path="https://en.wikipedia.org/wiki/Scientific_method#/media/File:The_Scientific_Method.svg" class="img-fluid rounded z-depth-1" %}
 
-![Scientific Method](https://en.wikipedia.org/wiki/Scientific_method#/media/File:The_Scientific_Method.svg)
+<!-- ![Scientific Method](https://upload.wikimedia.org/wikipedia/commons/8/82/The_Scientific_Method.svg) -->
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/The_Scientific_Method.svg" width="400" height="400" />
+
+<!-- ![Scientific Method](https://en.wikipedia.org/wiki/Scientific_method#/media/File:The_Scientific_Method.svg) -->
+
+
 
 Based on this, my view differs from that of my parents. I thought it would be quite interesting to debate this with a rational being who is also extremely knowledgeable: ChatGPT.
 
@@ -150,41 +156,41 @@ ChatGPT:
 > 
 > 1. “Mathematics ≠ Science” — True, but Not Irrelevant
 > 
-> You're right: a mathematical system can exist without being scientific (numerology is a good example). But in astrology’s defense, the math is not decorative. It’s functional—it predicts eclipses, retrogrades, transits, yogas, and matches events with real astronomical phenomena. That’s more than counting steps or crossing someone’s path.
+>     You're right: a mathematical system can exist without being scientific (numerology is a good example). But in astrology’s defense, the math is not decorative. It’s functional—it predicts eclipses, retrogrades, transits, yogas, and matches events with real astronomical phenomena. That’s more than counting steps or crossing someone’s path.
 > 
-> Just like Newtonian mechanics was later superseded by relativity but still works within a certain domain, Jyotish might not be “complete” but works within its own framework—say, for analyzing dasha periods, gochara, etc.
+>     Just like Newtonian mechanics was later superseded by relativity but still works within a certain domain, Jyotish might not be “complete” but works within its own framework—say, for analyzing dasha periods, gochara, etc.
 > 
 > 2. “Confirmation Bias” — A Serious Problem, but Not Unique to Astrology
 > 
-> Yes, confirmation bias is real. But isn’t it present in early medicine too? Or even in theoretical physics, where multiple competing models (like string theory) still await empirical verification?
+>     Yes, confirmation bias is real. But isn’t it present in early medicine too? Or even in theoretical physics, where multiple competing models (like string theory) still await empirical verification?
 > 
-> What serious astrologers argue is that the current empirical model is incomplete. Let’s take genetics. Identical twins with the same DNA can have drastically different lives and personalities. Astrology claims to offer an explanation based on moment-of-birth planetary imprint. Maybe that’s pseudoscience. But maybe it’s pointing to an interaction science hasn't modeled yet—just like epigenetics was once scoffed at.
+>     What serious astrologers argue is that the current empirical model is incomplete. Let’s take genetics. Identical twins with the same DNA can have drastically different lives and personalities. Astrology claims to offer an explanation based on moment-of-birth planetary imprint. Maybe that’s pseudoscience. But maybe it’s pointing to an interaction science hasn't modeled yet—just like epigenetics was once scoffed at.
 > 
-> Also: astrologers do keep logs, case studies, and try to replicate predictions. Could we formalize these under a rigorous scientific lens? Possibly. Should we throw it all away because the studies haven’t been funded or peer-reviewed yet? That might be premature skepticism.
+>     Also: astrologers do keep logs, case studies, and try to replicate predictions. Could we formalize these under a rigorous scientific lens? Possibly. Should we throw it all away because the studies haven’t been funded or peer-reviewed yet? That might be premature skepticism.
 > 
 > 3. “Interconnectedness” Sounds Vague — Yes, but Science is Headed There Too
 > 
-> You're being fair here, acknowledging this could be true but speculative. But look at quantum entanglement, chaos theory, or gravitational waves—many concepts once dismissed as mysticism now have mathematical descriptions. Astrology might be like the ancient blind man feeling the elephant’s trunk and calling it a snake. The explanation might be wrong, but the sensed effect might be real.
+>     You're being fair here, acknowledging this could be true but speculative. But look at quantum entanglement, chaos theory, or gravitational waves—many concepts once dismissed as mysticism now have mathematical descriptions. Astrology might be like the ancient blind man feeling the elephant’s trunk and calling it a snake. The explanation might be wrong, but the sensed effect might be real.
 > 
-> Maybe Mars doesn’t “cause” aggression. Maybe its position correlates with solar magnetic flux affecting prenatal neural development. Or maybe it’s nonsense. But don’t we owe it a test before we conclude?
+>     Maybe Mars doesn’t “cause” aggression. Maybe its position correlates with solar magnetic flux affecting prenatal neural development. Or maybe it’s nonsense. But don’t we owe it a test before we conclude?
 > 
 > 4. “Astrology Like MBTI” — Fair, but Not Entirely Arbitrary
 > 
-> MBTI isn’t scientific, but it’s useful. So are personality archetypes in Jyotish (Chandra rashis, Lagna nakshatras). The concern arises when they become deterministic.
+>     MBTI isn’t scientific, but it’s useful. So are personality archetypes in Jyotish (Chandra rashis, Lagna nakshatras). The concern arises when they become deterministic.
 > 
-> But just like weather forecasts don't say "It will rain at 3:01 PM," astrology shouldn't be seen as "X will happen to you," but "these are the likely patterns you may experience." If seen probabilistically rather than deterministically, astrology can be psychologically useful, even if not yet “scientific.”
+>     But just like weather forecasts don't say "It will rain at 3:01 PM," astrology shouldn't be seen as "X will happen to you," but "these are the likely patterns you may experience." If seen probabilistically rather than deterministically, astrology can be psychologically useful, even if not yet “scientific.”
 > 
 > 5. “Ancient Longevity ≠ Truth” — Strong Point, but Let’s Not Equate All Beliefs
 > 
-> True: long-standing belief doesn't mean truth. But survival + refinement is still a useful heuristic. Ayurveda evolved over trial and error. So did astrology. If something survives and grows more complex through millennia, maybe there's something nontrivial in it.
+>     True: long-standing belief doesn't mean truth. But survival + refinement is still a useful heuristic. Ayurveda evolved over trial and error. So did astrology. If something survives and grows more complex through millennia, maybe there's something nontrivial in it.
 > 
-> My rebuttal: Don’t compare it with belief in thunder gods. Compare it with acupuncture. Once dismissed, now studied. The same could happen here—if it passes the test.
+>     My rebuttal: Don’t compare it with belief in thunder gods. Compare it with acupuncture. Once dismissed, now studied. The same could happen here—if it passes the test.
 > 
 > 6. “Yoga and Ayurveda Had Direct Bodily Evidence” — Agreed. Astrology is Tricker.
 > 
-> Yes, the effects of yoga and herbs can be physically felt and tested. Astrology is subtler—more like studying climate instead of temperature. But subtle doesn’t mean false. The placebo effect is still poorly understood—and yet powerful.
+>     Yes, the effects of yoga and herbs can be physically felt and tested. Astrology is subtler—more like studying climate instead of temperature. But subtle doesn’t mean false. The placebo effect is still poorly understood—and yet powerful.
 > 
-> More importantly, even if most astrology turns out to be wrong, some patterns might hold. Wouldn't it be worth extracting the baby from the bathwater?
+>     More importantly, even if most astrology turns out to be wrong, some patterns might hold. Wouldn't it be worth extracting the baby from the bathwater?
 
 > Final Reflection as a Believer
 > 
@@ -214,47 +220,47 @@ ChatGPT:
 > 
 > 1. “Works within its own framework” implies doubt — But so does any model
 > 
-> You're right—it admits incompleteness. But that’s not always a weakness. No model is truly complete. Newtonian physics “works within its own framework” but breaks down at relativistic speeds. Classical economics “works” under ceteris paribus assumptions but often fails in chaotic real-world markets.
+>     You're right—it admits incompleteness. But that’s not always a weakness. No model is truly complete. Newtonian physics “works within its own framework” but breaks down at relativistic speeds. Classical economics “works” under ceteris paribus assumptions but often fails in chaotic real-world markets.
 > 
-> What Jyotishis argue is: this framework may not explain why Mars in the 7th causes strife, but it has observed that it correlates with strife enough times to treat it as a pattern worth tracking—at least empirically.
+>     What Jyotishis argue is: this framework may not explain why Mars in the 7th causes strife, but it has observed that it correlates with strife enough times to treat it as a pattern worth tracking—at least empirically.
 > 
-> It’s not proof. But it’s not wild guessing either (in the best of cases).
+>     It’s not proof. But it’s not wild guessing either (in the best of cases).
 > 
 > 2. "Belief-first" vs "Evidence-first": Absolutely valid criticism
 > 
-> You’re right that the epistemological burden is reversed in astrology. Scientists ask “Does this work? Let’s test.” Many astrologers say “This works. Why don’t you believe it?” That’s not good science.
+>     You’re right that the epistemological burden is reversed in astrology. Scientists ask “Does this work? Let’s test.” Many astrologers say “This works. Why don’t you believe it?” That’s not good science.
 > 
-> However, some might say astrology is proto-science—a system developed before the modern scientific method existed. It should be tested now. And believers who refuse such testing should be called out. A real astrologer confident in their method would want peer-reviewed validation.
+>     However, some might say astrology is proto-science—a system developed before the modern scientific method existed. It should be tested now. And believers who refuse such testing should be called out. A real astrologer confident in their method would want peer-reviewed validation.
 > 
-> The Jayant Narlikar study was, in fact, a blow to astrology’s claims—astrologers couldn’t outperform chance in predicting real-world outcomes. That’s damning, and it must be addressed honestly by any serious practitioner. But again: even if 90% of astrology fails, is there a 10% worth testing?
+>     The Jayant Narlikar study was, in fact, a blow to astrology’s claims—astrologers couldn’t outperform chance in predicting real-world outcomes. That’s damning, and it must be addressed honestly by any serious practitioner. But again: even if 90% of astrology fails, is there a 10% worth testing?
 > 
 > 3. “Correlation ≠ Causation” — Acknowledged, but Patterns Precede Explanation
 > 
-> Before germ theory, we still noticed that keeping wounds clean reduced infections. We didn’t know why. Correlation came first, causation followed. The astrologer’s defense is: we don’t yet know the causal mechanism, but maybe there's a signal buried in the noise.
+>     Before germ theory, we still noticed that keeping wounds clean reduced infections. We didn’t know why. Correlation came first, causation followed. The astrologer’s defense is: we don’t yet know the causal mechanism, but maybe there's a signal buried in the noise.
 > 
-> However, yes, most tests so far haven’t revealed that signal.
+>     However, yes, most tests so far haven’t revealed that signal.
 > 
 > 4. “Anecdotal efficacy ≠ Scientific utility” — Agreed
 > 
-> We absolutely need better-designed double-blind studies. Perhaps, even more than testing if predictions are right, we should test what effect receiving a prediction has on behavior. That might reveal the psychological power of astrology, not cosmic influence.
+>     We absolutely need better-designed double-blind studies. Perhaps, even more than testing if predictions are right, we should test what effect receiving a prediction has on behavior. That might reveal the psychological power of astrology, not cosmic influence.
 > 
-> If someone hears “you’ll face obstacles this year,” they might become more defensive, or more cautious—creating their own outcome. That’s not astrology being true. That’s human psychology being nudged by suggestion—a valid area of research in itself.
+>     If someone hears “you’ll face obstacles this year,” they might become more defensive, or more cautious—creating their own outcome. That’s not astrology being true. That’s human psychology being nudged by suggestion—a valid area of research in itself.
 > 
-> Maybe astrology is the original placebo for existential uncertainty. If so, it should be studied as that, not as astronomy in disguise.
+>     Maybe astrology is the original placebo for existential uncertainty. If so, it should be studied as that, not as astronomy in disguise.
 > 
 > 5. “Acupuncture ≠ Astrology” — Strong distinction
 > 
-> Yes. Acupuncture and yoga have demonstrable physiological impacts. Astrology doesn’t. Comparing the two is an attempt to create false equivalence. If anything, astrology's closest cousin is something like dream interpretation or Tarot: meaning-making systems, not medicine.
+>     Yes. Acupuncture and yoga have demonstrable physiological impacts. Astrology doesn’t. Comparing the two is an attempt to create false equivalence. If anything, astrology's closest cousin is something like dream interpretation or Tarot: meaning-making systems, not medicine.
 > 
 > 6. The Real Core Might Be the Placebo, Not the Planets
 > 
-> This might be the most honest and productive lens. Astrology might function more like narrative therapy—it gives people a sense of control, explanation, and orientation in the chaos of life. That's not science in the usual sense. But it is psychologically efficacious for some.
+>     This might be the most honest and productive lens. Astrology might function more like narrative therapy—it gives people a sense of control, explanation, and orientation in the chaos of life. That's not science in the usual sense. But it is psychologically efficacious for some.
 > 
-> A modern view might say:
+>     A modern view might say:
 > 
-> > "Astrology is a metaphor system people project their inner psychology onto."
+>     > "Astrology is a metaphor system people project their inner psychology onto."
 > 
-> And while that doesn’t justify predictions about marriages based on Jupiter, it might justify its continued sociological and psychological interest.
+>     And while that doesn’t justify predictions about marriages based on Jupiter, it might justify its continued sociological and psychological interest.
 > 
 > Final Concession (as the astrologer-turned-rationalist):
 > 
