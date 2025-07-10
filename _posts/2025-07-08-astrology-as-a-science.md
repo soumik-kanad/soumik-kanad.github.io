@@ -38,6 +38,7 @@ toc:
   - name: Introduction
   - name: tl;dr
   - name: Full Conversation
+  - name: Final Words
 # Below is an example of injecting additional post-specific styles.
 # If you use this post as a template, delete this _styles block.
 _styles: >
@@ -270,5 +271,15 @@ ChatGPT:
 > And if one day it turns out that every dasha period activates a neurological response? Well, science will be the first to say, "We were wrong."
 > 
 > Until then, the burden of proof is, and rightly remains, on astrology.
+
+## Final Words
+
+One may ask, why I chose ChatGPT over actual people. When I had a similar conversation with my parents, it led to people getting agitated, and instead of a proper debate, it resulted in anger and mockery. Secondly, for well-established subjects, I think the amount of preexisting knowledge that current LLMs have is definitely better than any non-expert human (and I didn't have access to an expert). This is why I could have a rational, evidence-backed, cordial debate. (I consider [Dr. Mike's debate with Dr. K](https://www.youtube.com/watch?v=zt6i6vVgiO4&pp=ygUOZHIuIG1pa2UgZHIuIGs%3D) as the gold standard for gracious debates.)  
+
+One observation that I have about humans is that we keep trying to find patterns in everything. It has evolutionarily been a successful strategy. But as a negative consequence, we keep finding patterns where there aren't any. The irony is that we have even found a pattern of humans' erroneous pattern finding and named this concept _Superstition_.
+
+Based on the conversation in the previous section, I think I made a strong case to support my opinion, which I think is quite rationally and evidentially grounded. I would urge the reader not to just straight away believe one side, but rather use their own brains, while keeping their preconceived notion aside, and come to a conclusion on their own. 
+
+As a person of Science, one needs to always keep an open mind when it comes to things that are neither proven nor disproven. But till such a proof arises, one ought to believe the side which logically makes the most sense. As I said, there is always a possibility that a person of Science may be wrong, but until proven wrong, things just feel mystic and unreasonable.   
 
 ---
