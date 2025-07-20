@@ -10,6 +10,9 @@ children:
     - title: divider
     - title: cv_failure
       permalink: /cv_failure/
+    - title: divider
+    - title: bad day? stop here.
+      permalink: /need_hugs/
     # - title: divider
     # - title: projects
     #   permalink: /projects/
