@@ -40,7 +40,7 @@ toc:
   - name: Premise
   - name: Debate/Discussion Notes
   - name: My Conclusions
-  - name: Further Reading
+  - name: Further Readings
 # Below is an example of injecting additional post-specific styles.
 # If you use this post as a template, delete this _styles block.
 _styles: >
@@ -116,7 +116,7 @@ These are notes on my chat with my Advisor on this topic. In this conversation, 
     * (There is no way to prove or disprove this yet, that with n-th order of differential data, maybe smartness directly emerges. ) 
 * Maybe mere Bayesian statistical systems like LLMs are not enough to achieve intelligence. But with meta-algorithms/meta-instructions which use such statistical systems as their base tools, but tell them how to explore/achieve novelty/intelligence, it is indeed doable. Minsky also said something in these lines - maybe our mind made of advanced systems, making intelligent hypothesis (in humans) consists 90% of bayesian reinforcement things but the rest 10% are symbolic like K-lines. I’m unsure that we have found the secret sauce in that meta-algorithm that makes these statistical systems intelligent. (My worry is what if you need Newton to tell an LLM the possibility of the existence of Newton's laws!) **A** seemed optimistic enough that it will happen in the next 10 years, given the current development, saying as a person who experienced times when HoG features would fail miserably, to experiencing an extremely useful reasoning assistant in our pockets. Let’s hope he is right, because that is a fascinating possibility to live for! 
 
-## Further thoughts and reading:
+## Further Readings:
 
 After the discussion, I also tried to look up some sources to make sure that I was not just supporting outdated notions. So, here are some reading materials:
 
