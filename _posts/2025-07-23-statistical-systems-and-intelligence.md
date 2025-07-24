@@ -149,9 +149,11 @@ After the discussion, I also tried to look up some sources to make sure that I w
     I think it was a good exercise, and ChatGPT gave me the following directions that I myself need to read.
     
     * Connectionist vs. Symbolic AI: Whether to represent and process data in human-readable symbols or empirically derived representation ([Goel (2023)](https://ojs.aaai.org/aimagazine/index.php/aimagazine/article/download/15111/18883), [Xiong et al. (2024)](https://arxiv.org/html/2407.08516v2))
-     
     * System‑1/System‑2 dual‑process views: Intuitive thinking vs effort based deliberate thinking ([Loo's blog](https://thedecisionlab.com/reference-guide/philosophy/system-1-and-system-2-thinking)).
-    * Predictive coding: Predicting the future and comparing with the real future. ([Wikipedia](https://en.wikipedia.org/wiki/Predictive_coding)).
+    * Predictive coding: Predicting the future and comparing it with the real future. ([Wikipedia](https://en.wikipedia.org/wiki/Predictive_coding)).
     * Pure scaling not enough: ([LeCun (2025)](https://finance.yahoo.com/news/meta-chief-ai-scientist-yann-153745262.html)).
+
+
+
   
 ---
