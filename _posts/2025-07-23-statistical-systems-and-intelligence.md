@@ -40,6 +40,7 @@ toc:
   - name: Premise
   - name: Debate/Discussion Notes
   - name: My Conclusions
+  - name: Further Reading
 # Below is an example of injecting additional post-specific styles.
 # If you use this post as a template, delete this _styles block.
 _styles: >
@@ -88,7 +89,7 @@ These are notes on my chat with my Advisor on this topic. In this conversation I
     * **S**: But there do exist examples of systems (humans in this case) which are intelligent, and there exists a way/algorithm that such systems have reached this level of intelligence (namely evolution.)
     * **A**: What was the last time you thought such a human arrived on this planet? 50 years? 100 years? Allow LLMs that much time to arrive to the conclusion that they cannot achieve intelligence.
     * [I wanted to propose an experiment but **A** kept saying that we can never faithfully achieve full amount of data required for this (eg. verbal discussions, lost documents, thoughts in the head):
-        * How about a hypothetical situation of giving all the knowledge available prior Newton’s time and make an LLM to come up with Newton’s laws? I am pretty sure that only next word prediction cannot make Newton’s laws of motion, but one cannot prove this faithfully.]
+        * How about a hypothetical situation of giving all the knowledge available prior Newton’s time and make an LLM to come up with Newton’s laws? I am pretty sure that only next word prediction cannot make Newton’s laws of motion, but one cannot prove this faithfully. (Email me if anyone wants to work on this idea!)]
 * _Interpolation vs Extrapolation_:
     * **S**: Current neural nets can interpolate between the data fed into them at some level of abstraction. Since, they have seen too much data they may seem to do intelligent things but I’d say all of this is just having extremely superior memory, retrieval, processing, and interpolation properties compared to one human’s capabilities. 
     * **A**: What about [protein folding](https://en.wikipedia.org/wiki/AlphaFold)? Maybe humans where also doing interpolation in some sense and intelligence is just interpolation at certain level of abstraction.
@@ -115,4 +116,43 @@ These are notes on my chat with my Advisor on this topic. In this conversation I
     * (There is no way to prove or disprove this yet, that with n-th order of differential data, maybe smartness directly emerges. ) 
 * Maybe mere bayesian statistical systems like LLMs are not enough to achieve intelligence. But with a meta-algorithms/meta-instructions which uses such statistical systems as their base tools, but tells them how to explore/achieve novelty/intelligence, it is indeed doable. Minsky also said something in these lines - maybe each advanced system making intelligent hypothesis (in humans) consists 90% of bayesian reinforcement things but the rest 10% are symbolic like K-lines. I’m unsure that we have found the secret sauce in that meta-algorithm that makes these statistical systems intelligent. (My worry is what if you need Newton to tell an LLM the possibility of the existence of Newton's laws!) **A** seemed optimistic enough that it will happen in next 10 years given the current development, saying as a person who experienced times when HoG features would fail miserably to experiencing an extremely useful reasoning assistant in our pockets. Let’s hope he is right, because that is a fascinating possibility to live for! 
 
+## Further thoughts and reading:
+
+After the discussion I also tried to look up some sources to make sure that I was not just supporting outdated notions. So, here are some reading materials:
+
+* ** About the definitions **:
+
+    * What I defined as "intelligence" is merely one aspect of what humans consider intelligence. This aspect is more suitable to be called [adaptive intelligent](https://dictionary.apa.org/adaptive-intelligence).
+
+* **Examples of AI beating humans**:
+
+    Even though I'm unsure that any of these examples are still forms of intelligent systems. My concern is that they are just smart brute-forcers. Regardless, they are defintely impressive and have beaten humans. 
+
+    * [AlphaFold2](https://www.nature.com/articles/d41586-020-03348-4) solved a 50-year old problem. 
+    * [AlphaTensor](https://deepmind.google/discover/blog/discovering-novel-algorithms-with-alphatensor/) found a faster matrix-multiplication method.
+    * [AlphaZero](https://www.newyorker.com/science/elements/how-the-artificial-intelligence-program-alphazero-mastered-its-games) has found new moves unknown to Chess Grand Masters.
+
+* **Interpolation vs Extrapolation**
+
+    * [Bonnasse-Gahot et al.](https://arxiv.org/abs/2207.08648) point towards held-out datapoints represented in neural network feature space being in interpolation regime.
+    * While [Balestriero et al.](https://arxiv.org/abs/2110.09485) saw that in raw pixel space, almost every test sample falls in the extrapolation regime.
+    
+* **Benchmarking intelligence**
+
+    It is very difficult to faithfully measure intelligence but it is still a very important task. Here are some attempts of people trying to measure intelligence on new AI systems.
+    * [ARC-Challenge](https://arcprize.org/) tests abastract pattern  invention without allowing brute-forcing.
+    * [LLM-SRBencg (2024)](https://arxiv.org/abs/2504.10415) tests whether LLMs can comeup with the final equations when they are absent in the corpus.
+    * [ResearchBench (2025)](https://arxiv.org/abs/2503.21248) tests whether LLMs can discover interesting reaseach innovations or hypothesis. 
+
+* **Alternate Theories to find the secret sauce**
+
+    I think it was a good excercise and ChatGPT gave me the following directions that I myself need to read.
+    
+     * Connectionist vs. Symbolic AI: Whether to represent and process data in human readable symbols or empirically derived representation ([Goel (2023)](https://ojs.aaai.org/aimagazine/index.php/aimagazine/article/download/15111/18883), [Xiong et al. (2024)](https://arxiv.org/html/2407.08516v2))
+     
+     * System‑1/System‑2 dual‑process views: Intuitive thinking vs effort based deliberate thinking ([Loo's blog](https://thedecisionlab.com/reference-guide/philosophy/system-1-and-system-2-thinking)).
+    
+    * Predictive coding: Predicting the future and comparing with the real future.([Wikipedia](https://en.wikipedia.org/wiki/Predictive_coding)).
+
+    * Pure scaling not enough: ([LeCun (2025)](https://finance.yahoo.com/news/meta-chief-ai-scientist-yann-153745262.html)).
 ---
