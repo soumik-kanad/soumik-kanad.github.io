@@ -91,15 +91,17 @@ These are notes on my chat with my Advisor on this topic. In this conversation I
         * How about a hypothetical situation of giving all the knowledge available prior Newton’s time and make an LLM to come up with Newton’s laws? I am pretty sure that only next word prediction cannot make Newton’s laws of motion, but one cannot prove this faithfully.]
 * _Interpolation vs Extrapolation_:
     * **S**: Current neural nets can interpolate between the data fed into them at some level of abstraction. Since, they have seen too much data they may seem to do intelligent things but I’d say all of this is just having extremely superior memory, retrieval, processing, and interpolation properties compared to one human’s capabilities. 
-    * **A**: What about protein folding? Maybe humans where also doing interpolation in some sense and intelligence is just interpolation at certain level of abstraction.
-    * **S**: Protein folding success is like saying alphaZero is smarter than humans because they have better processing capabilities to look into deeper possibility traces of Chess compared to human. But collectively we have achieved breakthroughs given enough time, and I don’t see statistical systems achieving that.
+    * **A**: What about [protein folding](https://en.wikipedia.org/wiki/AlphaFold)? Maybe humans where also doing interpolation in some sense and intelligence is just interpolation at certain level of abstraction.
+    * **S**: Protein folding success is like saying [AlphaZero](https://en.wikipedia.org/wiki/AlphaZero) is smarter than humans because they have better processing capabilities to look into deeper possibility traces of Chess compared to human. But collectively we have achieved breakthroughs given enough time, and I don’t see statistical systems achieving that.
     * **A**: Are you sure that given enough time LLMs can’t achieve such breakthroughs just using interpolation?
-        * [**S**: I there is no way to prove or disprove this right now.] 
+        * [**S**: I thnk there is no way to prove or disprove this right now.] 
 * _Differential/higher-order knowledge_
     * **A**: Maybe some N-th higher order knowledge differential (think of 2nd order differential as the feedback on whether an idea/hypothesis/thought is worth exploring or not) might be enough to make intelligent discoveries.
-    * **S**: I feel that is not enough (but there is no way to prove/disprove that). There needs to be exploration on top of differential data.
-* _**A**: But companies using RL to make statistical systems (like LLMs) do explicitly explore less probable directions/ideas_.
-    * **S**: To me that (eg. RLHF) also sounds like we are providing 2nd order knowledge data for their reward. Which is again supervision. The model didn’t come up with what to do.
+    * **S**: I feel that is not enough (but there is no way to prove/disprove that). There needs to be exploration/randomness on top of differential data.
+    * **A**: But people already use exploration like reinforcement learning and randomness in the form of seeds.
+    * **S**: Using seed for randomness does not make statistical systems look at improbable directions.
+* _**A**: Companies using [RL](https://en.wikipedia.org/wiki/Reinforcement_learning) to make statistical systems (like LLMs) do it so that these systems explicitly explore less probable directions/ideas_.
+    * **S**: To me that (eg. [RLHF](https://en.wikipedia.org/wiki/Reinforcement_learning_from_human_feedback)) also sounds like we are providing 2nd order knowledge data for their reward. Which is again supervision. The model didn’t come up with what to do.
     * **A**: How does it matter who is providing these signals/instructions till it makes a system intelligent?
 * _**A**: Is GPT o1 a statistical system (using the definition above) to you?_
     * **A**: Is ChatGPT a non-statistical system given it was asked to once in a while actively seek feedback for things less probable?
