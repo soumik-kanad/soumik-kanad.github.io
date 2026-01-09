@@ -34,6 +34,7 @@ I am thankful for having research opportunities to work with
 [Dr. Prem Seetharaman](https://pseeth.github.io/),
 [Dr. Eli Shechtman](https://research.adobe.com/person/eli-shechtman/),
 [Prof. Tianyi Zhou](https://tianyizhou.github.io/),
+[Mr. Ravi Teja Gadde](https://www.linkedin.com/in/ravionlinkedn/),
 [Mr. Nitin Singhal](https://www.linkedin.com/in/nitin-singhal-399a9811/),
 [Mr. Bhavya Ajani](https://www.linkedin.com/in/bhavyaajani/),
 [Prof. Arijit Sur](https://www.iitg.ac.in/arijit/),
