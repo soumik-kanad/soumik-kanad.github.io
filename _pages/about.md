@@ -30,6 +30,9 @@ I'm a PhD student at the [Department of Computer Science](https://www.cs.umd.edu
 My research interests lie in Computer Vision and Machine Learning, especially Generative Models. I'm currently working on generative model representations, generation in implicit neural representation (INR) space and facial video generation. I have previously worked in visual forgery detection and privacy apart from various medical image analysis algorithms (ultrasound).
 
 I am thankful for having research opportunities to work with 
+[Mr. Cameron Smith](https://research.adobe.com/person/cameron-smith/),
+[Dr. Prem Seetharaman](https://pseeth.github.io/),
+[Dr. Eli Shechtman](https://research.adobe.com/person/eli-shechtman/),
 [Prof. Tianyi Zhou](https://tianyizhou.github.io/),
 [Mr. Nitin Singhal](https://www.linkedin.com/in/nitin-singhal-399a9811/),
 [Mr. Bhavya Ajani](https://www.linkedin.com/in/bhavyaajani/),
