@@ -5,7 +5,7 @@ description:
 giscus_comments: true
 date: 2026-04-24
 featured: false
-# hidden: true
+hidden: true
 
 authors:
   - name: Soumik Mukhopadhyay
