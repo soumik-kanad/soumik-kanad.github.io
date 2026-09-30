@@ -133,6 +133,18 @@ preview = {diffssl.png},
 
 
 
+@article{mflow,
+      title={Rethinking the Design Space of Vanilla Pixel Diffusion Transformers}, 
+      author={Soumik Mukhopadhyay and Long Mai and Abhinav Shrivastava and Aniruddha Mahapatra},
+      year={2026},
+      month = {September},
+      journal={Under Submission},
+      selected = {true},
+      preview = {mflow.png},
+      blog = {https://anime26398.github.io/MFlow/mflow-parameterization.html},
+      abstract = {Pixel-space diffusion models have recently re-emerged as a compelling alternative to latent diffusion, avoiding the lossy latent bottleneck and separately trained autoencoder. JiT shows that a vanilla diffusion transformer can generate directly in pixel space by replacing the commonly used velocity prediction (v) with clean image prediction (x0). In this work, we revisit this choice and introduce Mꜰʟᴏᴡ, an adaptive parameterization that learns to interpolate between x0 and v prediction across principal directions of the data, which can be learned end-to-end with diffusion model training. We find that the preferred parameterization varies systematically with the data representation and model capacity. Notably, increasing model capacity shifts preference toward v prediction from x0 prediction. We evaluate Mꜰʟᴏᴡ across ImageNet, UCF-101 video, and large-scale text-to-image generation, demonstrating competitive or improved generative performance across diverse settings. In addition, we find that vanilla pixel diffusion transformers, irrespective of parameterization, retain a persistent high-frequency deficit relative to real images. To address this, we introduce ConvRefiner, a lightweight convolutional module trained post-hoc with adversarial loss while keeping the diffusion backbone frozen. With only a small amount of additional training, ConvRefiner restores the high-frequency statistics of generated images while preserving FID.},
+}
+
 
 @article{zhu2026selectivetimestepweightingadvantagebased,
       title={Selective Timestep Weighting and Advantage-Based Replay for Sample-Efficient Diffusion RLHF}, 
@@ -152,18 +164,6 @@ preview = {diffssl.png},
       abstract = {Reinforcement learning from human feedback (RLHF) has emerged as a powerful paradigm for aligning generative models with human preferences. However, applying RLHF to diffusion models remains highly feedback inefficient, as existing approaches typically require large amounts of human or reward model evaluations. This limitation reduces the practicality of diffusion RLHF in realworld settings where feedback is the primary bottleneck. In this paper, we propose two complementary strategies that substantially improve the feedback efficiency of diffusion RLHF while preserving generalization to unseen prompts. Our key observation is that reward information in diffusion trajectories is unevenly distributed: not all denoising timesteps or trajectories contribute equally to learning from a reward signal. By emphasizing informative timesteps and trajectories during optimization, we obtain more effective gradient updates. First, we introduce a per-timestep weighting scheme that reweights denoising steps during policy optimization. We theoretically connect this weighting to the optimal convergence properties of proximal policy optimization (PPO) and approximate the resulting weighting trend empirically. Second, we introduce a replay mechanism that prioritizes informative trajectories, enabling the model to reuse past samples instead of repeatedly querying new rewards. Together, these strategies significantly improve the feedback efficiency of diffusion RLHF. Under identical hyperparameter settings, our approach achieves up to a 6× improvement in sample efficiency compared to widely used diffusion RLHF baselines.},
 }
 
-
-@article{mflow,
-      title={Rethinking the Design Space of Vanilla Pixel Diffusion Transformers}, 
-      author={Soumik Mukhopadhyay and Long Mai and Abhinav Shrivastava and Aniruddha Mahapatra},
-      year={2026},
-      month = {September},
-      journal={Under Submission},
-      selected = {true},
-      preview = {mflow.png},
-      blog = {https://anime26398.github.io/MFlow/mflow-parameterization.html},
-      abstract = {Pixel-space diffusion models have recently re-emerged as a compelling alternative to latent diffusion, avoiding the lossy latent bottleneck and separately trained autoencoder. JiT shows that a vanilla diffusion transformer can generate directly in pixel space by replacing the commonly used velocity prediction (v) with clean image prediction (x0). In this work, we revisit this choice and introduce Mꜰʟᴏᴡ, an adaptive parameterization that learns to interpolate between x0 and v prediction across principal directions of the data, which can be learned end-to-end with diffusion model training. We find that the preferred parameterization varies systematically with the data representation and model capacity. Notably, increasing model capacity shifts preference toward v prediction from x0 prediction. We evaluate Mꜰʟᴏᴡ across ImageNet, UCF-101 video, and large-scale text-to-image generation, demonstrating competitive or improved generative performance across diverse settings. In addition, we find that vanilla pixel diffusion transformers, irrespective of parameterization, retain a persistent high-frequency deficit relative to real images. To address this, we introduce ConvRefiner, a lightweight convolutional module trained post-hoc with adversarial loss while keeping the diffusion backbone frozen. With only a small amount of additional training, ConvRefiner restores the high-frequency statistics of generated images while preserving FID.},
-}
 
 
 
