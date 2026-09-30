@@ -63,8 +63,12 @@
               {%- endif %}
 
 
-              <!-- CV google doc link --> 
-              <li class="nav-item"><a class="nav-link" href="https://docs.google.com/document/d/1HscuqLtrs2xj7eD8xlsuwBGHFiOodq5v85CXt5QUKqs/edit?usp=sharing">cv</a></li> 
+              <!-- <!-- CV google doc link --> -->
+              <!--<li class="nav-item"><a class="nav-link" href="https://docs.google.com/document/d/1HscuqLtrs2xj7eD8xlsuwBGHFiOodq5v85CXt5QUKqs/edit?usp=sharing">cv</a></li>  -->
+              <!-- Automatically truncated CV -->
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ '/assets/pdf/cv.pdf' | relative_url }}" target="_blank">cv</a>
+                </li>
 
               <!-- Other pages -->
               {%- assign sorted_pages = site.pages | sort: "nav_order" -%}
