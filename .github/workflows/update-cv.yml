@@ -1,0 +1,91 @@
+name: Update CV from Google Docs
+
+on:
+  # Lets you click "Run workflow" manually
+  workflow_dispatch:
+
+  # Automatically check Google Docs every hour
+  schedule:
+    - cron: "0 * * * *"
+
+permissions:
+  contents: write
+
+env:
+  # Number of pages from the BEGINNING of the Google Doc
+  # that should appear in the public CV.
+  PUBLIC_CV_PAGES: "3"
+
+  # Your Google Doc ID
+  GOOGLE_DOC_ID: "1HscuqLtrs2xj7eD8xlsuwBGHFiOodq5v85CXt5QUKqs"
+
+jobs:
+  update-cv:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out website repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install PDF library
+        run: pip install pypdf
+
+      - name: Download latest CV from Google Docs
+        run: |
+          curl -fL \
+            "https://docs.google.com/document/d/${GOOGLE_DOC_ID}/export?format=pdf" \
+            -o /tmp/full_cv.pdf
+
+      - name: Create public CV
+        run: |
+          mkdir -p assets/pdf
+
+          python <<'PY'
+          import os
+          from pypdf import PdfReader, PdfWriter
+
+          source = "/tmp/full_cv.pdf"
+          output = "assets/pdf/cv.pdf"
+
+          keep_pages = int(os.environ["PUBLIC_CV_PAGES"])
+
+          reader = PdfReader(source)
+
+          if len(reader.pages) < keep_pages:
+              raise RuntimeError(
+                  f"Google Doc only exported {len(reader.pages)} pages, "
+                  f"but PUBLIC_CV_PAGES={keep_pages}"
+              )
+
+          writer = PdfWriter()
+
+          for page in reader.pages[:keep_pages]:
+              writer.add_page(page)
+
+          with open(output, "wb") as f:
+              writer.write(f)
+
+          print(
+              f"Created {output}: keeping first {keep_pages} "
+              f"of {len(reader.pages)} pages."
+          )
+          PY
+
+      - name: Commit CV if it changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add assets/pdf/cv.pdf
+
+          if git diff --cached --quiet; then
+            echo "CV has not changed."
+          else
+            git commit -m "Update CV"
+            git push
+          fi
