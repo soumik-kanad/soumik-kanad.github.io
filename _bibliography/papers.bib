@@ -134,11 +134,12 @@ preview = {diffssl.png},
 
 
 
-@misc{zhu2026selectivetimestepweightingadvantagebased,
+@article{zhu2026selectivetimestepweightingadvantagebased,
       title={Selective Timestep Weighting and Advantage-Based Replay for Sample-Efficient Diffusion RLHF}, 
       author={Eric Zhu and Abhinav Shrivastava and Soumik Mukhopadhyay},
       year={2026},
       month = {May},
+      journal={arXiv preprint},
       eprint={2607.07693},
       archivePrefix={arXiv},
       primaryClass={cs.LG},
@@ -152,7 +153,7 @@ preview = {diffssl.png},
 }
 
 
-@misc{mflow,
+@article{mflow,
       title={Rethinking the Design Space of Vanilla Pixel Diffusion Transformers}, 
       author={Soumik Mukhopadhyay and Long Mai and Abhinav Shrivastava and Aniruddha Mahapatra},
       year={2026},
@@ -163,3 +164,7 @@ preview = {diffssl.png},
       blog = {https://anime26398.github.io/MFlow/mflow-parameterization.html},
       abstract = {Pixel-space diffusion models have recently re-emerged as a compelling alternative to latent diffusion, avoiding the lossy latent bottleneck and separately trained autoencoder. JiT shows that a vanilla diffusion transformer can generate directly in pixel space by replacing the commonly used velocity prediction (v) with clean image prediction (x0). In this work, we revisit this choice and introduce Mꜰʟᴏᴡ, an adaptive parameterization that learns to interpolate between x0 and v prediction across principal directions of the data, which can be learned end-to-end with diffusion model training. We find that the preferred parameterization varies systematically with the data representation and model capacity. Notably, increasing model capacity shifts preference toward v prediction from x0 prediction. We evaluate Mꜰʟᴏᴡ across ImageNet, UCF-101 video, and large-scale text-to-image generation, demonstrating competitive or improved generative performance across diverse settings. In addition, we find that vanilla pixel diffusion transformers, irrespective of parameterization, retain a persistent high-frequency deficit relative to real images. To address this, we introduce ConvRefiner, a lightweight convolutional module trained post-hoc with adversarial loss while keeping the diffusion backbone frozen. With only a small amount of additional training, ConvRefiner restores the high-frequency statistics of generated images while preserving FID.},
 }
+
+
+
+
