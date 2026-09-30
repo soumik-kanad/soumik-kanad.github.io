@@ -50,7 +50,7 @@ jobs:
           from pypdf import PdfReader, PdfWriter
 
           source = "/tmp/full_cv.pdf"
-          output = "assets/pdf/cv.pdf"
+          output = "assets/pdf/Soumik_Mukhopadhyay_CV.pdf"
 
           keep_pages = int(os.environ["PUBLIC_CV_PAGES"])
 
@@ -81,7 +81,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       
-          git add assets/pdf/cv.pdf
+          git add assets/pdf/Soumik_Mukhopadhyay_CV.pdf
       
           if git diff --cached --quiet; then
             echo "CV has not changed."
