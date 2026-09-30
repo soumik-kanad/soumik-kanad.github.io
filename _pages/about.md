@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: "<b>PhD candidate</b>, PI Lab, <a href='https://www.cs.umd.edu/'>University of Maryland</a>.  <br><b>Previously</b>: <a href='https://research.adobe.com/person/eli-shechtman/'> Adobe Research</a> | <a href='https://press.amazonmgmstudios.com/us/en'> Amazon Studios</a> | <a href='https://research.samsung.com/sri-b'> Samsung Reasearch</a> | <a href='https://iitg.ac.in/'>IIT Guwahati</a>. <br> Find me @ IRB3116, UMD."
+subtitle: "<b>PhD candidate</b>, PI Lab, <a href='https://www.cs.umd.edu/'>University of Maryland</a>.  <br><b>Previously</b>: <a href='https://research.adobe.com/person/eli-shechtman/'> Adobe Research</a> | <a href='https://press.amazonmgmstudios.com/us/en'> Amazon Studios</a> | <a href='https://research.samsung.com/sri-b'> Samsung Reasearch</a> | <a href='https://iitg.ac.in/'>IIT Guwahati</a>. <br> Find me @ IRB4116, UMD."
 
 profile:
   align: right
@@ -30,6 +30,8 @@ I'm a PhD student at the [Department of Computer Science](https://www.cs.umd.edu
 My research interests lie in Computer Vision and Machine Learning, especially Generative Models. I'm currently working on generative model representations, generation in implicit neural representation (INR) space and facial video generation. I have previously worked in visual forgery detection and privacy apart from various medical image analysis algorithms (ultrasound).
 
 I am thankful for having research opportunities to work with 
+[Mr. Aniruddha Mahapatra](https://anime26398.github.io/),
+[Dr. Long Mai](https://mai-t-long.com/),
 [Mr. Cameron Smith](https://research.adobe.com/person/cameron-smith/),
 [Dr. Prem Seetharaman](https://pseeth.github.io/),
 [Dr. Eli Shechtman](https://research.adobe.com/person/eli-shechtman/),
