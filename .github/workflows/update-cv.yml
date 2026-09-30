@@ -14,7 +14,7 @@ permissions:
 env:
   # Number of pages from the BEGINNING of the Google Doc
   # that should appear in the public CV.
-  PUBLIC_CV_PAGES: "3"
+  PUBLIC_CV_PAGES: "2"
 
   # Your Google Doc ID
   GOOGLE_DOC_ID: "1HscuqLtrs2xj7eD8xlsuwBGHFiOodq5v85CXt5QUKqs"
