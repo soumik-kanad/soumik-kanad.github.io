@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){window.renderMathInElement&&renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],throwOnError:!1}),document.querySelectorAll("[data-placeholder], [data-placeholder-inline]").forEach(function(e){e.addEventListener("click",function(e){e.preventDefault()})})});
