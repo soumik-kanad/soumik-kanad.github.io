@@ -1,0 +1,172 @@
+/* "Try it: dial the gains" widget (mflow_demo.js). All classes are prefixed md- to stay out of the page's way. */
+
+.md-card {
+  padding: 16px 18px 14px;
+  margin: .75rem 0 .5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .18);
+  font-family: "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
+}
+
+/* ---------- presets ---------- */
+.md-presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.md-preset {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 4px;
+  background: #ddd;
+  color: #212529;
+  opacity: .9;
+  font: 700 13px/1 "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
+  letter-spacing: .4px;
+  cursor: pointer;
+}
+.md-preset:hover { opacity: 1; background: #ccc; }
+.md-preset:active { transform: translateY(1px); }
+.md-preset.md-active { background: #007bff; color: #fff; opacity: 1; }
+.md-preset:focus-visible { outline: 3px solid #9ec5fe; outline-offset: 1px; }
+.md-reset {
+  padding: 8px 14px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background: #fff;
+  color: #212529;
+  font: 700 13px/1 "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
+  letter-spacing: .4px;
+  cursor: pointer;
+}
+.md-reset:hover:not(:disabled) { border-color: #212529; }
+.md-reset:active:not(:disabled) { transform: translateY(1px); }
+.md-reset:focus-visible { outline: 3px solid #9ec5fe; outline-offset: 1px; }
+.md-reset:disabled { color: #adb5bd; border-color: #e9ecef; cursor: default; }
+
+/* ---------- body: curve | equation ---------- */
+.md-body {
+  display: grid;
+  grid-template-columns: minmax(0, 43fr) minmax(0, 57fr);
+  gap: 18px;
+  align-items: start;
+  margin-top: 12px;
+}
+
+.md-plot { position: relative; }
+.md-svg { display: block; width: 100%; height: auto; touch-action: none; user-select: none; -webkit-user-select: none; }
+.md-svg text { font-family: "Source Sans Pro", Calibri, Candara, Arial, sans-serif; }
+.md-svg .md-hit { fill: transparent; cursor: ns-resize; }
+.md-svg .md-handle { cursor: ns-resize; outline: none; }
+.md-svg .md-handle circle { fill: #fff; stroke-width: 2.5; transition: r .1s ease; }
+.md-svg .md-handle:hover circle,
+.md-svg .md-handle.md-drag circle { r: 8.5px; }
+.md-svg .md-handle:focus-visible circle { stroke: #007bff !important; stroke-width: 4; }
+.md-svg .md-val { font-size: 10px; fill: #495057; text-anchor: middle; opacity: 0; transition: opacity .1s ease; pointer-events: none; }
+.md-svg .md-handle:hover .md-val,
+.md-svg .md-handle:focus-visible .md-val,
+.md-svg .md-handle.md-drag .md-val { opacity: 1; }
+
+.md-readout { text-align: center; font-size: .92rem; color: #495057; margin-top: 2px; }
+.md-readout b { color: #212529; font-weight: 600; }
+.md-hint { text-align: center; font-size: .8rem; color: #8a8e98; margin-top: 2px; }
+
+/* ---------- equation strip: x0 - M (x) eps = u_G ---------- */
+.md-eq { min-width: 0; }
+.md-eq-head,
+.md-eq-imgs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 18px minmax(0, 1fr) 18px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 6px;
+}
+.md-eq-head { margin-bottom: 6px; }
+.md-op { text-align: center; font-size: 1.5rem; font-weight: 700; color: #212529; line-height: 1; }
+
+.md-chip {
+  height: 30px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: italic 700 1.15rem/1 Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
+}
+.md-chip sub { font-size: .65em; font-style: normal; }
+.md-chip-x0 { background: #009E73; color: #fff; }
+
+.md-mterm { display: flex; align-items: center; gap: 5px; min-width: 0; }
+.md-mbar {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 30px;
+  display: flex;
+  border: 1.5px solid #212529;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.md-mbar span { flex: 1; }
+.md-mbar span.md-tail { flex: 1.5; }
+.md-mbar-letter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: italic 700 1.15rem/1 Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  color: #fff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+.md-otimes { font-size: 1.25rem; color: #212529; line-height: 1; }
+.md-epsthumb { width: 30px; height: 30px; flex: none; border-radius: 2px; background: #888; image-rendering: auto; }
+
+.md-result-label {
+  text-align: center;
+  font: italic 700 1.25rem/30px Palatino, "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  color: #212529;
+}
+.md-result-label sub { font-size: .65em; }
+
+.md-imgwrap { position: relative; }
+.md-canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  height: auto;
+  border-radius: 4px;
+  background: #f1f3f5;
+  image-rendering: auto;
+}
+.md-cap { display: block; text-align: center; font-size: .8rem; color: #495057; margin-top: 4px; line-height: 1.2; }
+.md-cap i { font-family: Palatino, "Palatino Linotype", Georgia, serif; }
+
+.md-wait {
+  margin: 0;
+  padding: 4rem 0;
+  text-align: center;
+  color: #6b6b6b;
+  font-size: .95rem;
+}
+
+.md-scale {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px auto 0;
+  max-width: 340px;
+  font-size: .78rem;
+  color: #8a8e98;
+}
+.md-scale-bar { flex: 1; height: 10px; border: 1px solid #bbb; background: linear-gradient(90deg, #000, #fff); }
+
+.md-note { font-size: .8rem; color: #8a8e98; text-align: center; margin: 8px 0 0; }
+
+@media (max-width: 768px) {
+  .md-body { grid-template-columns: 1fr; }
+  .md-chip, .md-mbar, .md-epsthumb { height: 26px; }
+  .md-epsthumb { width: 26px; }
+}

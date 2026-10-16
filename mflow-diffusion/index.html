@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rethinking the Design Space of Vanilla Pixel Diffusion Transformers</title>
+<meta name="description" content="MFlow learns a per-direction dial between clean-image and velocity prediction; ConvRefiner restores the high-frequency detail that vanilla pixel diffusion transformers systematically miss.">
+
+<meta property="og:title" content="Rethinking the Design Space of Vanilla Pixel Diffusion Transformers">
+<meta property="og:description" content="MFlow: a learned, direction-adaptive prediction parameterization. ConvRefiner: a post-hoc fix for the high-frequency deficit.">
+<meta property="og:image" content="assets/figures/teaser-7_thumb.webp">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Source+Sans+Pro:300,400,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<link rel="stylesheet" href="mflow_demo.css">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #212529;
+    background: #fff;
+  }
+
+  /* Pro-MAG sets running text in Palatino and everything else in Source Sans Pro. */
+  p, li, figcaption {
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+  }
+
+  a { color: #007bff; text-decoration: none; }
+  a:hover { color: #0056b3; text-decoration: underline; }
+
+  strong, b { font-weight: 700; }
+
+  img, video { display: block; max-width: 100%; }
+
+  .container { max-width: 1152px; margin: 0 auto; padding: 0 1.5rem; }
+  .narrow-col { max-width: 920px; margin: 0 auto; }
+
+  section { padding: 1.5rem 0; }
+  section > .container:first-child > h3:first-child { margin-top: 0; }
+
+  h1, h2, h3 {
+    color: #212529;
+    font-weight: 300;
+    line-height: 1.1;
+    text-align: center;
+  }
+  h2 { font-size: 2rem; margin: 0 0 1.5rem; }
+  h3 { font-size: 1.75rem; margin: 1.5rem 0 .75rem; }
+
+  p { margin: 0 0 1rem; }
+  .justified { text-align: justify; }
+  .centered { text-align: center; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 3rem 0 1.5rem; text-align: center; }
+
+  .publication-title {
+    font-family: "Google Sans", sans-serif;
+    font-size: 3rem;
+    line-height: 1.125;
+    margin: 0 0 1.5rem;
+    font-weight: 600;
+    color: #363636;
+  }
+  .dnerf { font-variant: small-caps; }
+
+  .publication-authors { color: #313437; margin: 0 0 1.25rem; }
+  .author-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .4rem 1.6rem;
+    font-size: 1.25rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .author-row a:hover { text-decoration: none; color: #0056b3; }
+  .affil-row { font-size: 1.1rem; line-height: 1.3; margin-bottom: .5rem; }   /* smaller than the author names (1.25rem) */
+  .affil-row span { display: inline-block; margin: 0 .6rem; }
+  .notes-row { font-size: .9rem; color: #5f6368; }
+  .notes-row span { margin: 0 .5rem; }
+
+  .publication-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border-radius: 4px;
+    background: #ddd;
+    color: #212529;
+    opacity: .9;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .4px;
+    line-height: 1;
+  }
+  .link-btn i { font-size: 20px; }
+  .link-btn:hover { opacity: 1; color: #212529; text-decoration: none; }
+  .link-btn:active { transform: translateY(1px); }
+
+  /* Tagline uses the same face as the author block (not the body serif). */
+  .hero .tagline, .hero .tag-aspects { font-family: "Source Sans Pro", Calibri, Candara, Arial, sans-serif; }
+  .tagline {
+    max-width: 920px;
+    margin: 1.25rem auto 0;
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: 400;
+  }
+  .tag-aspects { margin: .3rem auto 0; text-align: center; font-size: 1.125rem; }
+  .tag-aspects strong { font-weight: 600; }
+  .tag-sep { margin: 0 .6rem; color: #6b6b6b; }
+  .tag-link { color: inherit; border-bottom: 2px solid #9ec5fe; transition: border-color .2s ease, color .2s ease; }
+  .tag-link:hover { color: #007bff; border-bottom-color: #007bff; text-decoration: none; }
+
+  .publication-title:focus { outline: none; }
+
+  /* ---------- Justified gallery ---------- */
+  .gallery-wrap { padding-top: 1rem; }
+
+  .gallery {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  /* flex-grow = aspect ratio, so every tile in a row shares one height; fewer tiles = taller row. */
+  .tile {
+    flex: var(--ar) 1 0;
+    min-width: 0;
+    position: relative;
+    margin: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .tile:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .25);
+    z-index: 2;
+  }
+  .tile img {
+    width: 100%;
+    aspect-ratio: var(--ar);
+    object-fit: cover;
+    cursor: zoom-in;
+  }
+
+  .gallery-note { text-align: center; color: #7a7a7a; font-size: .9rem; margin-top: .75rem; }
+
+  /* ---------- Lightbox ---------- */
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    padding: 64px 84px;
+    background: rgba(12, 14, 17, .96);
+    align-items: center;
+    justify-content: center;
+    font-family: "Source Sans Pro", "Source Sans 3", Calibri, Arial, sans-serif;
+  }
+  .overlay.active { display: flex; }
+  .lb-stage { display: flex; flex-direction: column; align-items: center; max-width: 100%; max-height: 100%; }
+  .overlay img { max-width: 100%; max-height: calc(100vh - 190px); border-radius: 8px; background: #fff; cursor: default; }
+  .overlay-text { color: #e9ecef; font-family: Palatino, "Palatino Linotype", Georgia, serif; font-size: .95rem; line-height: 1.45;
+    margin-top: .9rem; max-width: 820px; text-align: center; }
+  .overlay-text:empty { display: none; }
+  .overlay-text .katex { color: inherit; }
+  .lb-btn {
+    position: absolute;
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    border: none; border-radius: 50%;
+    background: rgba(255, 255, 255, .12);
+    color: #fff; font-size: 28px; line-height: 1;
+    cursor: pointer;
+    transition: background-color .15s ease;
+  }
+  .lb-btn:hover { background: rgba(255, 255, 255, .24); }
+  .lb-btn:focus-visible { outline: 3px solid #9ec5fe; outline-offset: 2px; }
+  .lb-btn[hidden] { display: none; }
+  .lb-close { top: 16px; right: 16px; font-size: 26px; }
+  .lb-prev { left: 20px; top: 50%; margin-top: -22px; }
+  .lb-next { right: 20px; top: 50%; margin-top: -22px; }
+  .lb-count { position: absolute; top: 28px; left: 24px; color: rgba(255, 255, 255, .7); font-size: .9rem; letter-spacing: .04em; }
+  .zoom-target { cursor: zoom-in; }
+  .zoom-target:focus-visible { outline: 3px solid #007bff; outline-offset: 2px; }
+  html.lb-open { overflow: hidden; }
+  @media (max-width: 768px) {
+    .overlay { padding: 64px 12px 84px; }
+    .overlay img { max-height: calc(100vh - 220px); }
+    .lb-prev, .lb-next { top: auto; bottom: 20px; margin-top: 0; }
+    .lb-prev { left: calc(50% - 56px); }
+    .lb-next { right: calc(50% - 56px); }
+  }
+
+
+  .fig-note { display: inline-block; margin-top: .2rem; font-size: .82rem; color: #868e96; }
+
+  /* ---------- Desktop outline rail (>= 1280px) ----------
+     Uses the empty margin beside the 920px reading column, so it costs no vertical space.
+     It appears once the reader passes the gallery and shows the paper's two-part structure. */
+  .rail {
+    position: fixed;
+    top: 50%;
+    --rail-w: clamp(140px, calc((100vw - 920px) / 2 - 56px), 200px);
+    left: max(20px, calc((100vw - 920px) / 2 - var(--rail-w) - 32px));
+    width: var(--rail-w);
+    transform: translate(-8px, -50%);
+    z-index: 40;
+    font-family: "Source Sans Pro", "Source Sans 3", Calibri, Arial, sans-serif;
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease, visibility .25s;
+  }
+  .rail.show { opacity: 1; visibility: visible; pointer-events: auto; transform: translate(0, -50%); }
+  .rail-title {
+    display: block; margin: 0 0 .6rem 14px;
+    font-family: "Google Sans", "Product Sans", "Source Sans Pro", Arial, sans-serif;
+    font-size: .95rem; font-weight: 600; color: #212529; line-height: 1.25;
+  }
+  .rail-title:hover { color: #212529; text-decoration: none; }
+  .rail-list { list-style: none; margin: 0; padding: 0; border-left: 2px solid #e9ecef; }
+  .rail-list li { margin: 0; font-family: inherit; }
+  .rail-list a {
+    display: block; margin-left: -2px; padding: 3px 0 3px 12px;
+    border-left: 2px solid transparent;
+    color: #868e96; font-size: .875rem; line-height: 1.3;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .rail-list a:hover { color: #212529; text-decoration: none; }
+  .rail-list a.is-current { color: #212529; font-weight: 600; border-left-color: #007bff; }
+  .rail-list .rail-group > a { color: #495057; font-weight: 600; margin-top: .55rem; }
+  .rail-list li:first-child > a { margin-top: 0; }
+  .rail-list .rail-sub a { padding-left: 24px; }
+  .rail-list .rail-group > a .rail-kicker {
+    display: block; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: #adb5bd; font-weight: 600;
+  }
+  .rail-list .rail-group.has-current > a { color: #212529; }
+  .rail-progress { height: 2px; background: #e9ecef; border-radius: 2px; margin: .9rem 0 .7rem 14px; overflow: hidden; }
+  .rail-progress span { display: block; height: 100%; width: 0; background: #007bff; }
+  .rail-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-left: 14px; }
+  .rail-actions a, .rail-actions button {
+    display: inline-flex; align-items: center; gap: 6px;
+    height: 30px; padding: 0 10px; border: 1px solid #dee2e6; border-radius: 9999px;
+    background: #fff; color: #212529; font: 600 .8125rem/1 "Source Sans Pro", "Source Sans 3", Calibri, Arial, sans-serif;
+    cursor: pointer;
+  }
+  .rail-actions a:hover, .rail-actions button:hover { border-color: #adb5bd; text-decoration: none; color: #212529; }
+  .rail-actions :focus-visible, .rail-list a:focus-visible, .rail-title:focus-visible { outline: 3px solid #9ec5fe; outline-offset: 2px; }
+  @media (max-width: 1279px), (max-height: 620px) { .rail { display: none; } }
+  @media (min-width: 1280px) and (min-height: 621px) {
+    .site-nav { display: none; }     /* the rail replaces the top bar on wide screens */
+  }
+
+  /* ---------- Section navigation (narrow screens) ---------- */
+  [id] { scroll-margin-top: 64px; }
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, .94);
+    -webkit-backdrop-filter: saturate(1.4) blur(8px);
+    backdrop-filter: saturate(1.4) blur(8px);
+    border-top: 1px solid #ededed;
+    border-bottom: 1px solid #ededed;
+    font-family: "Source Sans Pro", "Source Sans 3", Calibri, Arial, sans-serif;
+    margin-top: 1.25rem;
+  }
+  .site-nav.is-stuck { box-shadow: 0 2px 10px rgba(0, 0, 0, .06); }
+  .nav-inner { display: flex; align-items: center; gap: 1.25rem; height: 48px; }
+  .nav-brand {
+    flex: none;
+    font-family: "Google Sans", "Product Sans", "Source Sans Pro", Arial, sans-serif;
+    font-weight: 600; font-size: 1.05rem; color: #212529;
+    opacity: 0; visibility: hidden; transition: opacity .2s ease;
+  }
+  .site-nav.is-stuck .nav-brand { opacity: 1; visibility: visible; }
+  .nav-brand:hover { text-decoration: none; color: #212529; }
+  .nav-links {
+    display: flex; gap: .25rem; margin: 0 auto;
+    overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a {
+    flex: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: #5f6368;
+    font-size: .9375rem; font-weight: 600; white-space: nowrap;
+  }
+  .nav-links a:hover { color: #212529; background: #f1f3f5; text-decoration: none; }
+  .nav-links a.is-current { color: #212529; box-shadow: inset 0 -2px 0 #007bff; border-radius: 0; }
+  .nav-links a:focus-visible { outline: 3px solid #9ec5fe; outline-offset: -3px; }
+  .nav-spacer { flex: none; width: 3.6rem; }
+
+  .to-top {
+    position: fixed; right: 20px; bottom: 20px; z-index: 60;
+    width: 44px; height: 44px; border: none; border-radius: 50%;
+    background: #212529; color: #fff; font-size: 20px; line-height: 1;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .2);
+    cursor: pointer;
+    opacity: 0; transform: translateY(8px); pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease;
+  }
+  .to-top.show { opacity: .92; transform: none; pointer-events: auto; }
+  .to-top:hover { opacity: 1; }
+  .to-top:focus-visible { outline: 3px solid #9ec5fe; outline-offset: 2px; }
+  @media (max-width: 768px) {
+    .nav-inner { height: 44px; gap: 0; padding: 0 .25rem; }
+    .nav-brand, .nav-spacer { display: none; }
+    .nav-links { margin: 0; }
+    .nav-links a { padding: 6px 9px; font-size: .875rem; }
+    .to-top { right: 14px; bottom: 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    figure:not(.tile), .tile, .to-top, .nav-brand { transition: none; }
+  }
+
+  /* ---------- Figures ---------- */
+  figure { margin: 1.25rem auto; text-align: center; }
+  figure img { margin: 0 auto; }
+  figcaption { font-size: .92rem; color: #6b6b6b; margin-top: .5rem; }
+
+  figure:not(.tile) {
+    padding: 12px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .18);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  /* Static figures pop out on hover and open in the lightbox on click. */
+  figure.zoomable:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0, 0, 0, .22); }
+  figure.zoomable img { cursor: zoom-in; }
+
+  /* Paired figures: equal-size boxes; images share one canvas size so their axes line up. */
+  .fig-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+  .fig-pair figure { margin: 1.25rem 0; display: flex; flex-direction: column; }
+  .fig-pair figure img { width: 100%; }
+  .fig-pair figcaption { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+  .part-header {
+    text-align: center;
+    margin: 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid #ededed;
+  }
+  .part-label {
+    display: inline-block;
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #fff;
+    background: #212529;
+    border-radius: 9999px;
+    padding: .2rem .8rem;
+    margin-bottom: .6rem;
+  }
+  .part-header h2 { margin-bottom: 0; }
+
+  .eq { overflow-x: auto; }
+
+  .insights { padding-left: 1.2rem; }
+  .insights li { margin-bottom: .6rem; }
+  .insights b { color: #212529; }
+
+  .aside { font-size: .92rem; color: #6b6b6b; }
+
+  .was { color: #b0413e; }
+  .is  { color: #2e7d32; font-weight: 700; }
+
+  /* ---------- Observations (collapsible) ---------- */
+  details.obs {
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    margin: .75rem 0;
+    background: #fafafa;
+  }
+  details.obs summary {
+    cursor: pointer;
+    padding: .8rem 1.1rem;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #212529;
+    list-style: none;
+  }
+  details.obs summary::-webkit-details-marker { display: none; }
+  details.obs summary::before {
+    content: "\25B8";
+    display: inline-block;
+    margin-right: .6rem;
+    transition: transform .2s ease;
+  }
+  details.obs[open] summary::before { transform: rotate(90deg); }
+  .obs-body { padding: 0 1.1rem 1rem; text-align: justify; }
+  .obs-take { font-style: italic; }
+  .obs-num { text-align: center; font-family: "Source Sans Pro", Calibri, Candara, Arial, sans-serif; font-size: 1.2rem; }
+
+  /* ---------- Benchmark comparison carousels ---------- */
+  .cmp-card {
+    padding: 16px;
+    margin: .75rem 0 1.75rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .18);
+    outline: none;
+  }
+  .cmp-nav { display: flex; align-items: center; gap: 12px; min-height: 6.5em; }
+  .cmp-prompt { flex: 1; margin: 0; text-align: center; font-style: italic; font-size: .95rem; color: #495057; }
+  .cmp-btn {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: #ddd;
+    color: #212529;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: .9;
+  }
+  .cmp-btn:hover { opacity: 1; background: #ccc; }
+  .cmp-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 12px; }
+  .cmp-item { text-align: center; }
+  .cmp-item img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; background: #f1f3f5; }
+  .cmp-label { display: block; margin-top: 4px; font-size: .8rem; line-height: 1.2; color: #495057; }
+  .cmp-item.ours img { box-shadow: 0 0 0 2px #007bff; }
+  .cmp-item.ours .cmp-label { color: #007bff; font-weight: 600; }
+  .cmp-dots { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+  .cmp-dot { width: 10px; height: 10px; padding: 0; border: none; border-radius: 50%; background: #ccc; cursor: pointer; }
+  .cmp-dot.active { background: #212529; }
+
+  /* ---------- Before/after slider ---------- */
+  .ba-stage {
+    position: relative;
+    margin: 4px auto 0;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #111;
+    user-select: none;
+    aspect-ratio: 640 / 416;
+    max-width: 640px;
+    --pos: 50%;
+  }
+  .ba-stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .ba-stage .ba-before { clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+  .ba-tag {
+    position: absolute;
+    top: 10px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, .55);
+    color: #fff;
+    font-size: .8rem;
+    font-weight: 600;
+    pointer-events: none;
+  }
+  .ba-tag.left { left: 10px; }
+  .ba-tag.right { right: 10px; }
+  .ba-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--pos);
+    width: 2px;
+    margin-left: -1px;
+    background: #fff;
+    pointer-events: none;
+  }
+  .ba-knob {
+    position: absolute;
+    top: var(--ky, 50%);
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    margin: -22px 0 0 -22px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, .45);
+    color: #fff;
+    font-size: 1.1rem;
+    line-height: 40px;
+    text-align: center;
+  }
+  /* Invisible native range input on top: gives drag, click-to-jump and keyboard control for free. */
+  .ba-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+  .ba-range:focus-visible + .ba-line .ba-knob { box-shadow: 0 0 0 3px #007bff; }
+  .ba-count { text-align: center; font-size: .85rem; color: #6b6b6b; margin-top: 8px; }
+
+
+  /* ---------- Loupe: two zoomed panes (without / with) that follow the cursor ---------- */
+  #ba-card .cmp-nav { flex-wrap: wrap; justify-content: center; gap: 14px 12px; }
+  #ba-card .cmp-nav > div:first-of-type { flex: 1 1 100% !important; order: -1; }
+  #ba-card .cmp-dots { margin-top: 0; flex-wrap: wrap; }
+  #ba-card .cmp-btn { width: 36px; height: 36px; font-size: 1.4rem; }
+  .ba-body { display: grid; grid-template-columns: minmax(0, 1fr) 272px; gap: 14px; align-items: stretch; }
+  .ba-main { min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+  .ba-main .ba-stage { margin: 0 auto; width: 100%; }
+  /* Press or drag to move the divider and the zoom centre; plain hovering changes nothing. */
+  .ba-main .ba-stage, .ba-main .ba-range { cursor: grab; }
+  .ba-main .ba-stage.is-dragging, .ba-main .ba-stage.is-dragging .ba-range { cursor: grabbing; }
+  .ba-loupe { display: grid; grid-template-rows: 1fr 1fr; gap: 8px; min-width: 0; }
+  .ba-pane { position: relative; min-height: 0; border-radius: 6px; overflow: hidden; background: #111; }
+  .ba-pane canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .ba-pane .ba-tag { top: 8px; left: 8px; font-size: .75rem; padding: 2px 8px; }
+  .ba-pane.is-with .ba-tag { background: rgba(0, 123, 255, .85); }
+  .ba-hint { text-align: center; font-size: .8rem; color: #868e96; margin-top: 4px; }
+  @media (max-width: 760px) {
+    .ba-body { grid-template-columns: 1fr; }
+    .ba-loupe { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .ba-pane { aspect-ratio: 1; }
+  }
+  @media (max-width: 600px) {
+    #ba-card { padding: 10px; }
+    #ba-card .ba-stage .ba-tag { font-size: .7rem; padding: 2px 6px; }
+    #ba-card .cmp-dots { order: 3; flex-basis: 100%; }
+  }
+
+  /* ---------- BibTeX ---------- */
+  .bibtex-box {
+    background: #f5f5f5;
+    padding: 1rem 1.25rem;
+    border-radius: 5px;
+    overflow-x: auto;
+    text-align: left;
+  }
+  .bibtex-box pre { margin: 0; font-family: "Courier New", monospace; font-size: .9rem; }
+
+  footer {
+    padding: 2.5rem 0 3rem;
+    text-align: center;
+    color: #7a7a7a;
+    font-size: .88rem;
+    background: #fafafa;
+    border-top: 1px solid #ededed;
+  }
+
+  @media (max-width: 768px) {
+    .publication-title { font-size: 2rem; }
+    h2 { font-size: 1.6rem; }
+    .fig-pair { grid-template-columns: 1fr; }
+    .gallery { flex-wrap: wrap; }
+    .tile { flex-basis: calc(var(--ar) * 120px); }
+    .cmp-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="container">
+    <h1 class="publication-title" tabindex="-1"><span class="dnerf">Rethinking the Design Space of<br>Vanilla Pixel Diffusion Transformers</span></h1>
+
+    <div class="publication-authors">
+      <div class="author-row">
+        <span><a href="https://soumik-kanad.github.io/">Soumik Mukhopadhyay</a><sup>1,2*</sup></span>
+        <span><a href="https://mai-t-long.com/">Long Mai</a><sup>2</sup></span>
+        <span><a href="https://abhinavsh.info/">Abhinav Shrivastava</a><sup>1</sup></span>
+        <span><a href="https://anime26398.github.io/">Aniruddha Mahapatra</a><sup>2&dagger;</sup></span>
+      </div>
+      <div class="affil-row">
+        <span><sup>1</sup> University of Maryland, College Park</span>
+        <span><sup>2</sup> Adobe Research</span>
+      </div>
+      <div class="notes-row">
+        <span><sup>*</sup>Work done while an intern at Adobe Research</span>
+        <span><sup>&dagger;</sup>Project Lead</span>
+      </div>
+    </div>
+
+    <div class="publication-links">
+      <a class="link-btn" href="#" data-placeholder><i class="ai ai-arxiv"></i><span>arXiv</span></a>
+      <a class="link-btn" href="assets/Mflow_arXiv.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf"></i><span>Paper</span></a>
+      <a class="link-btn" href="https://anime26398.github.io/MFlow/mflow-parameterization.html" target="_blank" rel="noopener"><i class="fas fa-pen-nib"></i><span>Blog</span></a>
+      <a class="link-btn" href="#bibtex"><i class="fas fa-quote-right"></i><span>BibTeX</span></a>
+    </div>
+
+    <p class="tagline">
+      In this work, we aim to improve the design space of vanilla pixel diffusion transformers along two aspects:
+    </p>
+    <p class="tag-aspects">
+      <a class="tag-link" href="#part-param"><strong>model parameterization</strong></a>
+      <span class="tag-sep">&amp;</span>
+      <a class="tag-link" href="#part-signal"><strong>frequency spectrum</strong></a>
+    </p>
+  </div>
+</section>
+
+<!-- ================= SECTION NAV ================= -->
+<nav class="site-nav" id="site-nav" aria-label="Page sections">
+  <div class="container nav-inner">
+    <a class="nav-brand" href="#top">MFlow</a>
+    <div class="nav-links">
+      <a href="#abstract">Abstract</a>
+      <a href="#part-param">MFlow</a>
+      <a href="#mflow-demo">Try it</a>
+      <a href="#findings">Observations</a>
+      <a href="#part-signal">ConvRefiner</a>
+      <a href="#comparison">Comparison</a>
+      <a href="#limitations">Limitations</a>
+      <a href="#bibtex">BibTeX</a>
+    </div>
+    <span class="nav-spacer" aria-hidden="true"></span>
+  </div>
+</nav>
+<aside class="rail" id="rail" aria-label="Paper outline">
+  <a class="rail-title" href="#top">MFlow</a>
+  <ul class="rail-list">
+    <li class="rail-group"><a href="#abstract">Abstract</a></li>
+    <li class="rail-group"><a href="#part-param"><span class="rail-kicker">Part I</span>Parameterization</a></li>
+    <li class="rail-sub"><a href="#method">MFlow</a></li>
+    <li class="rail-sub"><a href="#mflow-demo">Try it: dial the gains</a></li>
+    <li class="rail-sub"><a href="#mcurves">M-curves</a></li>
+    <li class="rail-sub"><a href="#findings">Observations</a></li>
+    <li class="rail-group"><a href="#part-signal"><span class="rail-kicker">Part II</span>Signal modeling</a></li>
+    <li class="rail-sub"><a href="#refiner">The frequency gap</a></li>
+    <li class="rail-sub"><a href="#convrefiner">ConvRefiner</a></li>
+    <li class="rail-sub"><a href="#fid-blind">What FID misses</a></li>
+    <li class="rail-sub"><a href="#see-difference">Before / after</a></li>
+    <li class="rail-group"><a href="#comparison">Comparison</a></li>
+    <li class="rail-sub"><a href="#dpg">DPG-Bench</a></li>
+    <li class="rail-sub"><a href="#prism">PRISM-Bench</a></li>
+    <li class="rail-group"><a href="#limitations">Limitations</a></li>
+  </ul>
+  <div class="rail-progress" aria-hidden="true"><span id="railProgress"></span></div>
+  <div class="rail-actions">
+    <a href="assets/Mflow_arXiv.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i>Paper</a>
+    <button type="button" id="railCite" title="Copy BibTeX to clipboard"><i class="fas fa-quote-right" aria-hidden="true"></i><span>Cite</span></button>
+  </div>
+</aside>
+<button type="button" class="to-top" id="toTop" aria-label="Back to top">&uarr;</button>
+
+<!-- ================= GALLERY ================= -->
+<section class="gallery-wrap">
+  <div class="container">
+
+    <!-- Row height = width / sum of aspect ratios, so fewer tiles in a row makes them larger. -->
+    <div class="gallery">
+      <figure class="tile" style="--ar:0.67"><img src="assets/ppts/teaser-images/image9.jpg" alt="MFlow sample"></figure>
+      <figure class="tile" style="--ar:0.67"><img src="assets/ppts/supp-gallery-images/image2.jpg" alt="MFlow sample"></figure>
+      <figure class="tile" style="--ar:0.76"><img src="assets/ppts/supp-gallery-images/image5.jpg" alt="MFlow sample"></figure>
+    </div>
+
+    <div class="gallery">
+      <figure class="tile" style="--ar:0.56"><img src="assets/ppts/supp-gallery-images/image4.jpg" alt="MFlow sample"></figure>
+      <figure class="tile" style="--ar:0.76"><img src="assets/ppts/supp-gallery-images/image7.jpg" alt="MFlow sample"></figure>
+      <figure class="tile" style="--ar:0.76"><img src="assets/ppts/supp-gallery-images/image8.jpg" alt="MFlow sample"></figure>
+      <figure class="tile" style="--ar:0.76"><img src="assets/ppts/teaser-images/image6.jpg" alt="MFlow sample"></figure>
+    </div>
+
+    <div class="gallery">
+      <figure class="tile" style="--ar:1.83"><img src="assets/ppts/teaser-images/image4.jpg" alt="MFlow sample" loading="lazy"></figure>
+      <figure class="tile" style="--ar:0.76"><img src="assets/ppts/supp-gallery-images/image1.jpg" alt="MFlow sample" loading="lazy"></figure>
+      <figure class="tile" style="--ar:1.54"><img src="assets/ppts/teaser-images/image7.jpg" alt="MFlow sample" loading="lazy"></figure>
+    </div>
+
+    <div class="gallery">
+      <figure class="tile" style="--ar:1.43"><img src="assets/ppts/teaser-images/image1.jpg" alt="MFlow sample" loading="lazy"></figure>
+      <figure class="tile" style="--ar:1.00"><img src="assets/ppts/teaser-images/image3.jpg" alt="MFlow sample" loading="lazy"></figure>
+      <figure class="tile" style="--ar:1.54"><img src="assets/ppts/teaser-images/image2.jpg" alt="MFlow sample" loading="lazy"></figure>
+      <figure class="tile" style="--ar:1.36"><img src="assets/ppts/teaser-images/image5.jpg" alt="MFlow sample" loading="lazy"></figure>
+    </div>
+
+    <div class="gallery">
+      <figure class="tile" style="--ar:1.32"><img src="assets/ppts/supp-gallery-images/image3.jpg" alt="MFlow sample" loading="lazy"></figure>
+      <figure class="tile" style="--ar:1.00"><img src="assets/ppts/supp-gallery-images/image10.jpg" alt="MFlow sample" loading="lazy"></figure>
+      <figure class="tile" style="--ar:1.79"><img src="assets/ppts/supp-gallery-images/image9.jpg" alt="MFlow sample" loading="lazy"></figure>
+      <figure class="tile" style="--ar:1.00"><img src="assets/ppts/supp-gallery-images/image11.jpg" alt="MFlow sample" loading="lazy"></figure>
+      <figure class="tile" style="--ar:1.32"><img src="assets/ppts/supp-gallery-images/image6.jpg" alt="MFlow sample" loading="lazy"></figure>
+    </div>
+
+    <p class="gallery-note">Text-to-image samples from MFlow&#8209;XXL/16 (13B&#8209;MoE, 2.9B active). Click any image to enlarge.</p>
+  </div>
+</section>
+
+<div class="overlay" id="imageOverlay" role="dialog" aria-modal="true" aria-label="Enlarged image">
+  <span class="lb-count" id="lbCount" aria-live="polite"></span>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close (Esc)">&times;</button>
+  <button type="button" class="lb-btn lb-prev" id="lbPrev" aria-label="Previous image">&#8249;</button>
+  <div class="lb-stage">
+    <img id="zoomedImg" alt="">
+    <div class="overlay-text" id="overlayText"></div>
+  </div>
+  <button type="button" class="lb-btn lb-next" id="lbNext" aria-label="Next image">&#8250;</button>
+</div>
+
+<!-- ================= ABSTRACT ================= -->
+<section id="abstract">
+  <div class="container narrow-col">
+    <h2>Abstract</h2>
+    <p class="justified">
+      Pixel-space diffusion models have recently re-emerged as a compelling alternative to latent diffusion,
+      avoiding the lossy latent bottleneck and separately trained autoencoder. JiT shows that a vanilla diffusion
+      transformer can generate directly in pixel space by replacing the commonly used velocity prediction
+      ($u$-prediction) with clean image prediction ($x_0$-prediction).
+      In this work, we revisit this choice and introduce <strong>MFlow</strong>, an adaptive parameterization that
+      learns to interpolate between $x_0$- and $u$-prediction across principal directions of the data, learned
+      end-to-end with diffusion training. We find that the preferred parameterization varies systematically with
+      the data representation and model capacity &mdash; notably, increasing model capacity shifts preference toward
+      velocity prediction. We evaluate MFlow across ImageNet, UCF-101 video, and large-scale text-to-image
+      generation, demonstrating competitive or improved generative performance across diverse settings. In
+      addition, we find that vanilla pixel diffusion transformers, irrespective of parameterization, retain a
+      persistent high-frequency deficit relative to real images. To address this, we introduce
+      <strong>ConvRefiner</strong>, a lightweight convolutional module trained post-hoc with an adversarial loss
+      while keeping the diffusion backbone frozen. With only a small amount of additional training, ConvRefiner
+      restores the high-frequency statistics of generated images while preserving FID.
+    </p>
+  </div>
+</section>
+
+<!-- ================= PART I ================= -->
+<div class="container">
+  <div class="part-header" id="part-param">
+    <span class="part-label">Part I</span>
+    <h2>Prediction Parameterization</h2>
+  </div>
+</div>
+
+<section id="method">
+  <div class="container narrow-col">
+    <h3>MFlow: a dial per direction</h3>
+    <p class="justified">
+      Diffusion models must be told <em>what</em> to regress. Most predict the velocity $u = x_0 - \epsilon$;
+      JiT instead predicts the clean image $x_0$, since clean data lies near a low-dimensional manifold while
+      noise spans the ambient space. But converting an $x_0$-prediction back to velocity divides by $1-t$, which
+      blows up near the clean endpoint. AsymFlow patches this by predicting velocity inside a rank-$r$ PCA
+      subspace and $x_0$ outside it &mdash; an all-or-nothing choice per direction, with $r$ found by sweeping.
+    </p>
+  </div>
+
+  <div class="container narrow-col">
+    <figure>
+      <img src="assets/figures/method-mflow.webp" alt="MFlow compared with x0-prediction, velocity prediction and AsymFlow" loading="lazy">
+      <figcaption>
+        Every method here is a choice of per-direction gain $m_i$. JiT sets all $m_i=0$, velocity prediction sets
+        all $m_i=1$, AsymFlow uses a binary mask. MFlow makes $m_i$ continuous and <em>learned</em>.
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="container narrow-col">
+    <p class="justified">
+      MFlow replaces AsymFlow's binary projector with a graded spectral operator
+      $M = U\,\mathrm{diag}(m_1,\dots,m_D)\,U^\top$ over the patch-PCA basis, and regresses
+    </p>
+    <div class="eq">$$u_G \;=\; x_0 - M\epsilon, \qquad m_i \in [0,1].$$</div>
+    <p class="justified">
+      Since $M$ is generally not a projector, it does not split space into a subspace and its complement &mdash;
+      each direction carries its own continuous mix, $\tilde u_{G,i} = \tilde x_{0,i} - m_i\tilde\epsilon_i$.
+      Setting $m_i = \mathbf{1}[i\le r]$ recovers AsymFlow exactly; $m_i\equiv0$ and $m_i\equiv1$ recover the two
+      endpoints.
+    </p>
+    <p class="justified">
+      Crucially these gains can be learned jointly with the network, because velocity stays exactly recoverable
+      from $u_G$ for every $m_i \in [0,1]$ &mdash; and for any $m_i>0$ the clean-endpoint singularity that
+      motivated the problem disappears in that direction. The loss is applied in <strong>velocity space</strong>,
+      not on $u_G$ directly.
+    </p>
+    <p class="aside centered">
+      The recovery rule, initialization and training details are in the paper and the
+      <a href="https://anime26398.github.io/MFlow/mflow-parameterization.html" target="_blank" rel="noopener">blog post</a>.
+    </p>
+  </div>
+</section>
+
+<section id="mflow-demo">
+  <div class="container narrow-col">
+    <h3>Try it: dial the gains</h3>
+    <p class="justified">
+      Every parameterization above is just a curve of gains $m_i$. Pick one, or drag the curve yourself, and watch
+      the regression target $u_G = x_0 - M\epsilon$ change for the same image and noise as in the figure: lifting a
+      gain mixes that direction's noise into the target, dropping it to zero predicts the clean image there.
+    </p>
+    <div class="md-card" id="md-card" aria-label="Interactive MFlow gain curve playground">
+      <p class="md-wait">Loading interactive demo&hellip;</p>
+    </div>
+  </div>
+</section>
+
+<section id="mcurves">
+  <div class="container narrow-col">
+    <h3>M-curves</h3>
+    <p class="justified">
+      Plotting the learned gains $m_i$ against PCA direction gives a direct readout of how much velocity
+      prediction the model chose to buy, and where it spent it &mdash; 0 means predict the clean image here,
+      1 means predict velocity. The same recipe produces visibly different answers along four axes.
+    </p>
+  </div>
+
+  <div class="container narrow-col">
+    <figure>
+      <img src="assets/figures/curve_mflow_gains_paper1.webp" alt="Learned MFlow gain curves across objective, domain, representation and capacity" loading="lazy">
+    </figure>
+  </div>
+
+  <div class="container narrow-col">
+    <ul class="insights">
+      <li><b>(a) Objective.</b> Adding LPIPS pushes nearly everything toward clean-image prediction &mdash; except a
+        few leading directions, where the curve becomes conspicuously non-monotonic.</li>
+      <li><b>(b) Domain.</b> Moving from images to video shrinks the number of directions with meaningful gain
+        further still.</li>
+      <li><b>(c) Representation.</b> On RAEv2 latents the gains collapse almost to zero, independently
+        rediscovering the pure $x_0$-prediction that RAEv2's own model uses.</li>
+      <li><b>(d) Capacity.</b> Scaling 1.1B&nbsp;&rarr;&nbsp;13B-MoE shifts more directions toward velocity. The
+        bigger model asks for a different parameterization, and gets it automatically.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="findings">
+  <div class="container narrow-col">
+    <h3>Observations</h3>
+    <p class="centered">
+      The parameterization is a measuring instrument as much as a method. Some of what it measured surprised us.
+    </p>
+
+    <details class="obs">
+      <summary>Capacity is a budget, and the budget has a name</summary>
+      <div class="obs-body">
+        <p>
+          Two forces pull against each other. Larger $m_i$ improves conditioning near the clean endpoint, but
+          forces a finite-capacity network to keep more Gaussian noise in its target &mdash; hard in high
+          dimensions. So the model is really deciding how much velocity prediction it can <em>afford</em>,
+          summarised by the <strong>soft velocity rank</strong> $r_{\mathrm{eff}} = \mathrm{tr}(M) = \sum_i m_i$:
+          zero for pure $x_0$, exactly $r$ for rank-$r$ AsymFlow, continuous and learned for MFlow.
+        </p>
+        <p class="obs-take">
+          Capacity decides <em>how much</em>; the statistics of the representation decide <em>where</em>.
+        </p>
+      </div>
+    </details>
+
+    <details class="obs">
+      <summary>LPIPS bends the curve &mdash; toward <em>patch-global</em> modes</summary>
+      <div class="obs-body">
+        <p>
+          With LPIPS the leading gains stop decreasing monotonically: PC0 and PC1 stay high, PC2&ndash;PC3 dip hard,
+          PC4 rises again. The eigenvectors explain the shape &mdash; the modes run <em>patch-global, patch-global,
+          spatial, spatial, patch-global</em>, matching <em>high, high, low, low, high</em>.
+        </p>
+        <p>
+          The giveaway is that this cannot be variance ordering: PC4 has far lower variance than PC2&ndash;PC3
+          ($\lambda_4=3.74$ vs $\lambda_2=9.41$, $\lambda_3=7.93$) yet gets a larger gain. Nor is it simply
+          &ldquo;LPIPS likes colour&rdquo; &mdash; later chromatic directions that are spatially non-uniform get no
+          boost.
+        </p>
+        <p class="obs-take">
+          Our reading: squared-error regression shrinks uncertain components toward their mean. For a spatially
+          varying mode that merely smooths a texture; for a patch-global mode it shifts the tone of the whole patch,
+          which LPIPS punishes. We flag this as a plausible interpretation, not an established mechanism.
+        </p>
+        <figure>
+          <img src="assets/figures/pca_modes_top64.webp" alt="First 64 eigenvectors of the uncentered 16x16x3 patch-PCA basis" loading="lazy">
+          <figcaption>The leading patch-PCA modes, interleaving patch-global tone and chroma with spatial gradients.</figcaption>
+        </figure>
+      </div>
+    </details>
+
+    <details class="obs">
+      <summary>&ldquo;Top-$r$ directions&rdquo; is a prior, not a law</summary>
+      <div class="obs-body">
+        <p>
+          There is a clean argument for spending the velocity budget on the highest-variance directions, and we
+          give it &mdash; but it is an initialization prior, not a rule. On ImageNet at B-level a non-leading block
+          beat the leading one, PCA[9:16] reaching FID 3.54 against PCA[1:8]'s 3.59. The non-monotonic LPIPS curve
+          says the same thing differently: an auxiliary objective reorders directions by visual function rather
+          than by variance.
+        </p>
+      </div>
+    </details>
+
+    <details class="obs">
+      <summary>A representation can prefer $x_0$ and still tolerate velocity almost free</summary>
+      <div class="obs-body">
+        <p>
+          On RAEv2 latents, pure $x_0$-prediction wins (FID 1.05) and MFlow's gains collapse toward zero, confirming
+          that choice. Yet AsymFlow &mdash; using <em>full</em> velocity prediction in its leading 8 directions
+          &mdash; lands just 0.03 behind at 1.08. The point is not that velocity is better here, but that a small
+          velocity subspace costs almost nothing measurable even where $x_0$ is strongly preferred.
+        </p>
+      </div>
+    </details>
+
+    <details class="obs">
+      <summary>Lower diffusion loss did not translate into better FID</summary>
+      <div class="obs-body">
+        <p>
+          Under an identical velocity-space objective, MFlow reaches a slightly lower training loss than both JiT
+          and AsymFlow at H-level &mdash; and this does not reliably show up as better FID. We report it because it
+          is a real negative result: better regression conditioning need not improve distribution-level sample
+          quality, and the underlying reason remains unclear.
+        </p>
+        <figure>
+          <img src="assets/figures/loss_curve_H_jit_asym_mflow.webp" alt="ImageNet H-level training loss for JiT, AsymFlow and MFlow" loading="lazy">
+        </figure>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ================= PART II ================= -->
+<div class="container">
+  <div class="part-header" id="part-signal">
+    <span class="part-label">Part II</span>
+    <h2>Signal Modeling</h2>
+  </div>
+</div>
+
+<section id="refiner">
+  <div class="container narrow-col">
+    <h3>Every one of these models misses the same frequencies</h3>
+    <p class="justified">
+      Measured against real images, the radially-averaged power spectrum of JiT-family generations shows a
+      consistent gap at <strong>0.5&ndash;0.7 cycles/pixel</strong>. It appears in JiT, AsymFlow and MFlow alike,
+      so it is not a parameterization problem.
+    </p>
+  </div>
+
+  <div class="container narrow-col">
+    <div class="fig-pair">
+      <figure>
+        <img src="assets/figures/curve_fig1_H_flows_raps_web.webp" alt="RAPS curves showing high-frequency deficit across JiT, AsymFlow and MFlow" loading="lazy">
+        <figcaption>Changing the prediction target does not change the deficit.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/figures/curve_fig2_jit_vs_baselines_raps_web.webp" alt="RAPS curves for latent models, VAE reconstructions and PixelDiT" loading="lazy">
+        <figcaption>Latent models, VAE reconstructions and PixelDiT show no such gap.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="container narrow-col">
+    <p class="justified">
+      That second panel localises the cause: the deficit is specific to the JiT-style backbone &mdash;
+      16&ndash;32&times; patchification with no intra-patch local operation, tokens mapped back to pixels by MLPs
+      alone. Models with an explicit pixel-level pathway do not have it, and training JiT 5% longer does not change
+      the spectrum at all.
+    </p>
+
+    <h3 id="convrefiner">ConvRefiner</h3>
+    <p class="justified">
+      We therefore restore the missing frequencies post hoc. ConvRefiner is a small residual convolutional module predicting
+      a correction on top of the model's $x_0$-prediction. The backbone stays frozen; only four conv blocks and a
+      $t$-conditioned PatchGAN discriminator train, for +30 epochs on a 600-epoch model &mdash; 5% extra compute.
+      The adversarial loss is applied only on near-clean samples.
+    </p>
+  </div>
+
+  <div class="container narrow-col">
+    <figure style="max-width: 75%;">
+      <img src="assets/figures/convrefiner.webp" alt="ConvRefiner architecture overview" loading="lazy">
+    </figure>
+  </div>
+
+  <div class="container narrow-col">
+    <h3 id="fid-blind">FID cannot see any of this</h3>
+    <p class="justified">
+      ConvRefiner closes most of the spectral gap and FID does not move at all: the mean radial power deficit for
+      MFlow-H/16 goes from <span class="was">&minus;6.63 dB</span> to <span class="is">&minus;1.29 dB</span>
+      while FID stays at <strong>1.81</strong>. That cuts both ways &mdash; it is why the fix is free, and
+      it is a warning about the metric.
+    </p>
+  </div>
+
+  <div class="container narrow-col">
+    <div class="fig-pair">
+      <figure>
+        <img src="assets/figures/curve_posthoc_raps_4models_web.webp" alt="RAPS before and after ConvRefiner across four models" loading="lazy">
+        <figcaption>The spectrum is recovered across both parameterizations and both scales&hellip;</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/figures/curve_posthoc_fid_4models_web.webp" alt="FID before and after ConvRefiner across four models" loading="lazy">
+        <figcaption>&hellip;while FID stays essentially flat throughout.<br><span class="fig-note">Training-time FID at default CFG, so higher than the tuned 1.81 above.</span></figcaption>
+      </figure>
+    </div>
+
+    <figure>
+      <img src="assets/figures/t2i_convrefiner.webp" alt="512px text-to-image crop without and with ConvRefiner, and the radial power spectrum before and after refinement" loading="lazy">
+      <figcaption>
+        Text-to-image at 512px: without (left) and with (middle) ConvRefiner. The refiner restores fine leaf-vein
+        texture, and the radial power spectrum (right) moves back onto the real-image curve at high frequencies.
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="container narrow-col">
+    <p class="aside justified">
+      Not every refiner works. Fine-tuning only the unpatchify layer is negligible, as is a residual
+      windowed-attention refiner. The DiP patch-detailer does improve high frequency, but degrades JiT's FID from
+      3.42 to 3.90 &mdash; and to 4.46 with a GAN loss.
+    </p>
+
+    <h3 id="see-difference">See the difference</h3>
+    <p class="centered">
+      Text-to-image samples from MFlow-XXL/16, without and with ConvRefiner. Click or drag on the image to compare; the
+      zoomed panes show the fine texture side by side.
+    </p>
+    <div class="cmp-card" id="ba-card" tabindex="0" aria-label="ConvRefiner before and after comparison">
+      <div class="cmp-nav" style="min-height: 0;">
+        <button type="button" class="cmp-btn" data-step="-1" aria-label="Previous example">&#8249;</button>
+        <div style="flex: 1; min-width: 0;">
+          <div class="ba-body">
+            <div class="ba-main">
+              <div class="ba-stage">
+                <img class="ba-after" alt="MFlow-XXL/16 sample with ConvRefiner">
+                <img class="ba-before" alt="MFlow-XXL/16 sample without ConvRefiner">
+                <span class="ba-tag left">Without ConvRefiner</span>
+                <span class="ba-tag right">With ConvRefiner</span>
+                <input class="ba-range" type="range" min="0" max="100" value="50" step="0.5" aria-label="Slide to compare without and with ConvRefiner">
+                <div class="ba-line"><span class="ba-knob">&#8596;</span></div>
+              </div>
+            </div>
+            <div class="ba-loupe" aria-label="Zoomed comparison of the highlighted region">
+              <div class="ba-pane"><canvas class="ba-zoom-no" aria-label="Zoomed region without ConvRefiner"></canvas><span class="ba-tag">Without</span></div>
+              <div class="ba-pane is-with"><canvas class="ba-zoom-yes" aria-label="Zoomed region with ConvRefiner"></canvas><span class="ba-tag">With</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="cmp-dots"></div>
+        <button type="button" class="cmp-btn" data-step="1" aria-label="Next example">&#8250;</button>
+      </div>
+      <div class="ba-count" aria-live="polite"></div>
+      <p class="ba-hint">Click or drag on the image to move the divider; the panes zoom in 2&times; around the circle. Each example opens where the refiner adds the most fine detail.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPARISON ================= -->
+<section id="comparison">
+  <div class="container narrow-col">
+    <h2>Comparison with Pixel Diffusion Models</h2>
+    <p class="justified">
+      Text-to-image samples from our MMDiT models and recent pixel-space diffusion models on the same prompts.
+      Each card shows one prompt at a time; use the arrows (or the &larr;&nbsp;&rarr; keys) to step through prompts.
+    </p>
+
+    <h3 id="dpg">DPG-Bench</h3>
+    <div class="cmp-card" data-bench="dpg" tabindex="0" aria-label="DPG-Bench comparison"></div>
+
+    <h3 id="prism">PRISM-Bench</h3>
+    <div class="cmp-card" data-bench="prism" tabindex="0" aria-label="PRISM-Bench comparison"></div>
+  </div>
+</section>
+
+<!-- ================= LIMITATIONS ================= -->
+<section id="limitations">
+  <div class="container narrow-col">
+    <h2>Limitations</h2>
+    <p class="justified">
+      <strong>MFlow's gains over strong fixed parameterizations are sometimes modest.</strong> One likely reason is
+      that we optimise the gains and the network jointly: the transport target is fixed, but updating $M$
+      continuously changes the network's output parameterization, so the two can co-adapt against an effectively
+      moving target. Staged or decoupled optimisation of the gains is the obvious next step.
+    </p>
+    <p class="justified">
+      <strong>Lower diffusion loss did not reliably translate into better FID,</strong> and the cause of this discrepancy remains an open question.
+    </p>
+    <p class="justified">
+      <strong>Standard generative metrics do not capture the high-frequency recovery.</strong> ConvRefiner closes
+      most of the spectral gap and FID registers no change at all &mdash; which says more about the metric than
+      about the module. FID-style distribution distances are insensitive to the local frequency statistics the
+      refiner modifies, so spectral fidelity needs to be reported alongside them rather than folded into them.
+    </p>
+  </div>
+</section>
+
+<!-- ================= BIBTEX ================= -->
+<section id="bibtex">
+  <div class="container narrow-col">
+    <h2>BibTeX</h2>
+    <div class="bibtex-box">
+<pre><code>@misc{mukhopadhyay2026mflow,
+  title  = {Rethinking the Design Space of Vanilla Pixel Diffusion Transformers},
+  author = {Mukhopadhyay, Soumik and Mai, Long and Shrivastava, Abhinav and Mahapatra, Aniruddha},
+  year   = {2026}
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>Website layout adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under
+      <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+  </div>
+</footer>
+
+<script>
+  /* ---------- Lightbox: gallery tiles and figure cards, with prev/next, keyboard and swipe ---------- */
+  (function () {
+    var overlay = document.getElementById("imageOverlay");
+    var zoomed = document.getElementById("zoomedImg");
+    var text = document.getElementById("overlayText");
+    var count = document.getElementById("lbCount");
+    var btnClose = document.getElementById("lbClose");
+    var btnPrev = document.getElementById("lbPrev");
+    var btnNext = document.getElementById("lbNext");
+    var group = [], index = 0, opener = null;
+
+    // Each group is a list of {img, cap}; arrows step within the group the clicked image belongs to.
+    var gallery = [].map.call(document.querySelectorAll(".tile img"), function (img) { return { img: img, cap: null }; });
+    var figures = [];
+    document.querySelectorAll("figure:not(.tile)").forEach(function (fig) {
+      var img = fig.querySelector(":scope > img");
+      if (!img) return;
+      fig.classList.add("zoomable");
+      figures.push({ img: img, cap: fig.querySelector("figcaption") });
+    });
+
+    function show(i) {
+      index = (i + group.length) % group.length;
+      var it = group[index];
+      zoomed.src = it.img.currentSrc || it.img.src;
+      zoomed.alt = it.img.alt;
+      // Captions are our own static markup (already KaTeX-rendered), so cloning their HTML is safe.
+      text.innerHTML = it.cap ? it.cap.innerHTML : "";
+      count.textContent = group.length > 1 ? (index + 1) + " / " + group.length : "";
+      btnPrev.hidden = btnNext.hidden = group.length < 2;
+    }
+    function open(g, i) {
+      group = g;
+      opener = document.activeElement;
+      show(i);
+      overlay.classList.add("active");
+      document.documentElement.classList.add("lb-open");
+      btnClose.focus({ preventScroll: true });
+    }
+    function close() {
+      if (!overlay.classList.contains("active")) return;
+      overlay.classList.remove("active");
+      document.documentElement.classList.remove("lb-open");
+      zoomed.removeAttribute("src");
+      if (opener && opener.focus) opener.focus({ preventScroll: true });
+    }
+
+    [gallery, figures].forEach(function (g) {
+      g.forEach(function (it, i) {
+        var img = it.img;
+        img.classList.add("zoom-target");
+        img.tabIndex = 0;
+        img.setAttribute("role", "button");
+        img.setAttribute("aria-label", "Enlarge image" + (img.alt ? ": " + img.alt : ""));
+        img.addEventListener("click", function () { open(g, i); });
+        img.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(g, i); }
+        });
+      });
+    });
+
+    btnClose.addEventListener("click", close);
+    btnPrev.addEventListener("click", function (e) { e.stopPropagation(); show(index - 1); });
+    btnNext.addEventListener("click", function (e) { e.stopPropagation(); show(index + 1); });
+    // Clicking the dark backdrop closes; clicking the image or caption does not.
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay || e.target.classList.contains("lb-stage")) close();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (!overlay.classList.contains("active")) return;
+      if (e.key === "Escape") { e.preventDefault(); close(); }
+      else if (e.key === "ArrowLeft" && group.length > 1) { e.preventDefault(); show(index - 1); }
+      else if (e.key === "ArrowRight" && group.length > 1) { e.preventDefault(); show(index + 1); }
+      else if (e.key === "Tab") {
+        // Keep focus inside the dialog.
+        var f = [btnClose, btnPrev, btnNext].filter(function (b) { return !b.hidden; });
+        var k = f.indexOf(document.activeElement);
+        e.preventDefault();
+        f[(k + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus();
+      }
+    });
+
+    // Swipe left/right on touch screens.
+    var x0 = null;
+    overlay.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    overlay.addEventListener("touchend", function (e) {
+      if (x0 === null || group.length < 2) return;
+      var dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 50) show(index + (dx < 0 ? 1 : -1));
+      x0 = null;
+    });
+  })();
+
+  /* ---------- Desktop outline rail: show after the gallery, highlight current item, progress, copy BibTeX ---------- */
+  (function () {
+    var rail = document.getElementById("rail");
+    if (!rail) return;
+    var abstract = document.getElementById("abstract");
+    var bib = document.getElementById("bibtex");
+    var bar = document.getElementById("railProgress");
+    var items = [].slice.call(rail.querySelectorAll(".rail-list a")).map(function (a) {
+      return { a: a, li: a.parentElement, el: document.querySelector(a.getAttribute("href")) };
+    }).filter(function (it) { return it.el; });
+    var current = null, ticking = false;
+
+    function groupOf(li) {
+      var n = li;
+      while (n && !n.classList.contains("rail-group")) n = n.previousElementSibling;
+      return n;
+    }
+    function update() {
+      ticking = false;
+      var vh = window.innerHeight;
+      var top = abstract.getBoundingClientRect().top;
+      var end = bib.getBoundingClientRect().top;
+      // Visible from the abstract until the BibTeX section reaches the middle of the screen.
+      rail.classList.toggle("show", top < vh * 0.6 && end > vh * 0.5);
+      var k = -1;
+      for (var i = 0; i < items.length; i++) if (items[i].el.getBoundingClientRect().top <= 110) k = i;
+      var next = k >= 0 ? items[k] : null;
+      if (next !== current) {
+        rail.querySelectorAll(".is-current, .has-current").forEach(function (n) {
+          n.classList.remove("is-current", "has-current"); n.removeAttribute("aria-current");
+        });
+        current = next;
+        if (current) {
+          current.a.classList.add("is-current");
+          current.a.setAttribute("aria-current", "true");
+          var g = groupOf(current.li);
+          if (g && g !== current.li) g.classList.add("has-current");
+        }
+      }
+      var start = abstract.offsetTop, stop = bib.offsetTop - vh * 0.5;
+      var f = Math.min(1, Math.max(0, (window.scrollY - start + 110) / Math.max(1, stop - start)));
+      bar.style.width = (f * 100).toFixed(1) + "%";
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+
+    var cite = document.getElementById("railCite");
+    var label = cite.querySelector("span");
+    cite.addEventListener("click", function () {
+      var txt = bib.querySelector("pre").innerText;
+      function done(msg) { label.textContent = msg; setTimeout(function () { label.textContent = "Cite"; }, 1600); }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(function () { done("Copied"); }, function () { location.hash = "bibtex"; });
+      } else {
+        location.hash = "bibtex";
+      }
+    });
+  })();
+
+  /* ---------- Section nav: stuck state, current-section highlight, back-to-top ---------- */
+  (function () {
+    var nav = document.getElementById("site-nav");
+    var toTop = document.getElementById("toTop");
+    var links = [].slice.call(nav.querySelectorAll(".nav-links a"));
+    function linkFor(id) { return nav.querySelector('.nav-links a[href="#' + id + '"]'); }
+    // Page regions in document order and the link each one lights up (M-curves sits after the demo
+    // but belongs to MFlow; the ConvRefiner section belongs to Part II).
+    var regions = [["abstract", "abstract"], ["part-param", "part-param"], ["mflow-demo", "mflow-demo"],
+      ["mcurves", "part-param"], ["findings", "findings"], ["part-signal", "part-signal"],
+      ["comparison", "comparison"], ["limitations", "limitations"], ["bibtex", "bibtex"]]
+      .map(function (r) { return { el: document.getElementById(r[0]), link: linkFor(r[1]) }; })
+      .filter(function (r) { return r.el && r.link; });
+    var current = null, ticking = false;
+
+    function update() {
+      ticking = false;
+      var navBottom = nav.getBoundingClientRect().bottom;
+      nav.classList.toggle("is-stuck", nav.getBoundingClientRect().top <= 0.5);
+      toTop.classList.toggle("show", window.scrollY > window.innerHeight * 1.5);
+      var k = -1;
+      for (var i = 0; i < regions.length; i++) {
+        if (regions[i].el.getBoundingClientRect().top <= navBottom + 80) k = i;
+      }
+      // At the very bottom, the last section is current even if it is short.
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) k = regions.length - 1;
+      var next = k >= 0 ? regions[k].link : null;
+      if (next === current) return;
+      if (current) { current.classList.remove("is-current"); current.removeAttribute("aria-current"); }
+      current = next;
+      if (current) {
+        current.classList.add("is-current");
+        current.setAttribute("aria-current", "true");
+        // Keep the active link visible when the link row scrolls sideways on phones.
+        var row = current.parentElement, l = current.offsetLeft, r = l + current.offsetWidth;
+        if (l < row.scrollLeft || r > row.scrollLeft + row.clientWidth) row.scrollTo({ left: l - 16, behavior: "smooth" });
+      }
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    window.addEventListener("resize", update);
+    toTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      document.querySelector(".publication-title").focus({ preventScroll: true });
+    });
+    update();
+  })();
+
+  (function () {
+    // Image files are numbered (prompt - 1) * 10 + method, in the method order of the paper's Figs. 16-17.
+    var METHODS = [
+      "PixelDiT-T2I", "PixelNerd (XXL/16)", "PixelFlow (XL/4)", "PixelGen (XXL/16)", "DeCo (XXL/16)",
+      "MiniT2I (L/16)", "MMDiT-JiT (L/16)", "MMDiT-Asym8 (L/16)", "MMDiT-MFlow (L/16)", "MMDiT-MFlow (XXL/16)"
+    ];
+    var OURS = [8, 9];
+
+    var BENCHES = {
+      dpg: {
+        folder: "assets/ppts/dpg-gallery-images/",
+        firstImage: 1,
+        prompts: [
+          "a detailed oil painting depicting a ginger cat with green eyes, intently focused on a game of checkers. The cat is seated at a small wooden table, with the checkerboard laid out in front of it, pieces strategically placed. The painting captures the texture of the cat's fur and the wood grain of the table, set against a soft, neutral background that draws attention to the subject.",
+          "A close-up image of an intricately designed lotus flower, which appears to be crafted entirely from crystal-clear water droplets. The flower is set against a backdrop of soft green lily pads floating on a tranquil pond. Sunlight filters through the scene, highlighting the delicate texture and the shimmering surface of the water-formed petals.",
+          "a spacious square where a large, weathered stone pedestal stands prominently at the center, devoid of the horse statue that once adorned it. The pedestal's surface is rough and covered with patches of moss, indicating its age and exposure to the elements. Around the base, cobblestones are laid in a pattern that radiates outward, suggesting the importance of the now-absent statue.",
+          "An aerial view of a coastal French city, captured in a satellite image, reveals a sprawling green park on the western edge, bordered by neatly arranged streets. To the north, a majestic mountain looms over the urban landscape, its peak just touching the edges of a drifting cloud that partially obscures the view. The intricate patterns of the city's layout are visible, with residential areas, winding roads, and the shimmering coastline all distinctly marked from this bird's-eye perspective.",
+          "An image showcasing an individual with a smartphone in their left hand, positioned right next to a pair of black-framed glasses resting upon a table. The person in the scene, clearly engrossed in their device, is wearing a textured dark jacket, suitable for chilly weather. Above them, a clear blue sky stretches expansively, uninterrupted by any visible obstacles or elements."
+        ]
+      },
+      prism: {
+        folder: "assets/ppts/prism-gallery-images/",
+        firstImage: 51,
+        prompts: [
+          "Embracing the warmth of rustic charm, this cabin invites serenity and introspection, where the crackling fire whispers stories of comfort, the soft textures of wood evoke a timeless connection to nature, and the gentle breeze through the windows carries the promise of peace and renewal.",
+          "Castle Rock in Sedona, Arizona, stands as a silent sentinel of eternity, its rugged forms piercing the sky like ancient sentinels, while the vibrant greenery below whispers tales of resilience and renewal, inviting contemplation amidst the timeless embrace of nature.",
+          "Two joyful children, accompanied by a playful puppy, explore a vibrant forest trail filled with blooming yellow flowers and towering trees, embodying the spirit of adventure and friendship.",
+          "Lindsey Wixson stands confidently in a golden wheat field, donning a wide-brimmed straw hat, bold red sunglasses, and a vibrant red fur-trimmed top, accessorized with a sparkling diamond necklace, embodying summer elegance.",
+          "Radiant joy and youthful exuberance shine through a playful haircut, symbolizing the boundless freedom and innocence of childhood."
+        ]
+      }
+    };
+
+    function el(tag, cls, parent) {
+      var e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (parent) parent.appendChild(e);
+      return e;
+    }
+
+    document.querySelectorAll(".cmp-card[data-bench]").forEach(function (card) {
+      var bench = BENCHES[card.dataset.bench];
+      var n = bench.prompts.length;
+      var current = 0;
+
+      var nav = el("div", "cmp-nav", card);
+      var prev = el("button", "cmp-btn", nav);
+      var prompt = el("p", "cmp-prompt", nav);
+      var next = el("button", "cmp-btn", nav);
+      prev.type = next.type = "button";
+      prev.innerHTML = "&#8249;";
+      next.innerHTML = "&#8250;";
+      prev.setAttribute("aria-label", "Previous prompt");
+      next.setAttribute("aria-label", "Next prompt");
+      prompt.setAttribute("aria-live", "polite");
+
+      var grid = el("div", "cmp-grid", card);
+      var imgs = METHODS.map(function (name, i) {
+        var item = el("div", "cmp-item" + (OURS.indexOf(i) >= 0 ? " ours" : ""), grid);
+        var img = el("img", null, item);
+        img.loading = "lazy";
+        el("span", "cmp-label", item).textContent = name;
+        return img;
+      });
+
+      var dotsWrap = el("div", "cmp-dots", card);
+      var dots = bench.prompts.map(function (_, p) {
+        var d = el("button", "cmp-dot", dotsWrap);
+        d.type = "button";
+        d.setAttribute("aria-label", "Prompt " + (p + 1) + " of " + n);
+        d.addEventListener("click", function () { show(p); });
+        return d;
+      });
+
+      function src(p, m) { return bench.folder + "image" + (bench.firstImage + p * 10 + m) + ".jpg"; }
+
+      function show(p) {
+        current = (p + n) % n;
+        prompt.textContent = "\u201C" + bench.prompts[current] + "\u201D";
+        imgs.forEach(function (img, m) {
+          img.src = src(current, m);
+          img.alt = METHODS[m] + ": " + bench.prompts[current];
+        });
+        dots.forEach(function (d, i) { d.classList.toggle("active", i === current); });
+        // Warm the cache for the next prompt so the arrow feels instant.
+        METHODS.forEach(function (_, m) { new Image().src = src((current + 1) % n, m); });
+      }
+
+      prev.addEventListener("click", function () { show(current - 1); });
+      next.addEventListener("click", function () { show(current + 1); });
+      card.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft") { e.preventDefault(); show(current - 1); }
+        if (e.key === "ArrowRight") { e.preventDefault(); show(current + 1); }
+      });
+
+      show(0);
+    });
+  })();
+
+  (function () {
+    var card = document.getElementById("ba-card");
+    // File indices of no-N/yes-N pairs to show; 2 (horses) is excluded because the pair is not aligned.
+    var EXAMPLES = [0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+    var N = EXAMPLES.length;
+    var FOLDER = "assets/ppts/frequency/";
+    var stage = card.querySelector(".ba-stage");
+    var after = card.querySelector(".ba-after");
+    var before = card.querySelector(".ba-before");
+    var range = card.querySelector(".ba-range");
+    var count = card.querySelector(".ba-count");
+    var dotsWrap = card.querySelector(".cmp-dots");
+    var current = 0;
+
+    // Show samples at native size or smaller; upscaling would blur the detail being compared.
+    after.addEventListener("load", function () {
+      stage.style.aspectRatio = after.naturalWidth + " / " + after.naturalHeight;
+      stage.style.maxWidth = after.naturalWidth + "px";
+    });
+
+    // ----- Loupe: the same region of both images, magnified, in two panes -----
+    var cvNo = card.querySelector(".ba-zoom-no"), cvYes = card.querySelector(".ba-zoom-yes");
+    var ZOOM = 2, zoom = ZOOM, cx = null, cy = null, loaded = 0;
+
+    function paneSize() {
+      var r = cvNo.getBoundingClientRect();
+      return { w: Math.max(1, r.width), h: Math.max(1, r.height) };
+    }
+    // Source rectangle (native pixels) shown in each pane: pane CSS size / zoom.
+    function srcRect() {
+      var nw = after.naturalWidth, nh = after.naturalHeight, ps = paneSize();
+      var sw = Math.min(nw, ps.w / zoom), sh = Math.min(nh, ps.h / zoom);
+      var x = Math.min(Math.max(cx - sw / 2, 0), nw - sw), y = Math.min(Math.max(cy - sh / 2, 0), nh - sh);
+      return { x: x, y: y, w: sw, h: sh, nw: nw, nh: nh };
+    }
+    function drawPane(cv, img, r) {
+      var dpr = window.devicePixelRatio || 1, b = cv.getBoundingClientRect();
+      var W = Math.round(b.width * dpr), H = Math.round(b.height * dpr);
+      if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+      var ctx = cv.getContext("2d");
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+      ctx.clearRect(0, 0, W, H);
+      ctx.drawImage(img, r.x, r.y, r.w, r.h, 0, 0, W, H);
+    }
+    function render() {
+      if (loaded < 2 || cx === null || !after.naturalWidth) return;
+      var r = srcRect();
+      drawPane(cvNo, before, r);
+      drawPane(cvYes, after, r);
+      // The divider and the knob sit on the zoom centre, so there is one point of focus, not three.
+      var px = Math.min(100, Math.max(0, cx / r.nw * 100)), py = Math.min(100, Math.max(0, cy / r.nh * 100));
+      stage.style.setProperty("--pos", px + "%");
+      stage.style.setProperty("--ky", py + "%");
+      range.value = px;
+    }
+    // Start at the region where the two versions differ most (block sum of |with - without|).
+    function autoFocus() {
+      var nw = after.naturalWidth, nh = after.naturalHeight;
+      cx = nw / 2; cy = nh / 2;
+      try {
+        var c = document.createElement("canvas"); c.width = nw; c.height = nh;
+        var g = c.getContext("2d", { willReadFrequently: true });
+        g.drawImage(after, 0, 0); var A = g.getImageData(0, 0, nw, nh).data;
+        g.drawImage(before, 0, 0); var B = g.getImageData(0, 0, nw, nh).data;
+        var ps = paneSize(), bw = Math.round(ps.w / zoom), bh = Math.round(ps.h / zoom), cell = 8;
+        var gw = Math.floor(nw / cell), gh = Math.floor(nh / cell), grid = new Float32Array(gw * gh);
+        function luma(D) {
+          var L = new Float32Array(nw * nh);
+          for (var k = 0; k < nw * nh; k++) L[k] = .299 * D[4 * k] + .587 * D[4 * k + 1] + .114 * D[4 * k + 2];
+          return L;
+        }
+        var LA = luma(A), LB = luma(B);
+        // Score = high-frequency energy the refiner adds (|Laplacian| with minus without), summed per cell.
+        for (var y = 1; y < Math.min(gh * cell, nh - 1); y++) for (var x = 1; x < Math.min(gw * cell, nw - 1); x++) {
+          var i = y * nw + x;
+          var la = Math.abs(4 * LA[i] - LA[i - 1] - LA[i + 1] - LA[i - nw] - LA[i + nw]);
+          var lb = Math.abs(4 * LB[i] - LB[i - 1] - LB[i + 1] - LB[i - nw] - LB[i + nw]);
+          grid[Math.floor(y / cell) * gw + Math.floor(x / cell)] += la - lb;
+        }
+        var kw = Math.max(1, Math.round(bw / cell)), kh = Math.max(1, Math.round(bh / cell)), best = -1;
+        for (var gy = 0; gy + kh <= gh; gy++) for (var gx = 0; gx + kw <= gw; gx++) {
+          var sum = 0;
+          for (var yy = 0; yy < kh; yy++) for (var xx = 0; xx < kw; xx++) sum += grid[(gy + yy) * gw + gx + xx];
+          if (sum > best) { best = sum; cx = (gx + kw / 2) * cell; cy = (gy + kh / 2) * cell; }
+        }
+      } catch (err) { /* canvas unreadable (e.g. opened from file://): keep the centre */ }
+    }
+    function onLoad() { loaded++; if (loaded === 2) { autoFocus(); render(); } }
+    after.addEventListener("load", onLoad);
+    before.addEventListener("load", onLoad);
+
+    function moveTo(e) {
+      var b = stage.getBoundingClientRect();
+      if (!after.naturalWidth || !b.width) return;
+      cx = (e.clientX - b.left) / b.width * after.naturalWidth;
+      cy = (e.clientY - b.top) / b.height * after.naturalHeight;
+      render();
+    }
+    // Only a press (click, or touch) moves the divider and the zoom centre; hovering leaves them alone.
+    var dragId = null;
+    stage.addEventListener("pointerdown", function (e) {
+      if (e.button !== 0) return;
+      dragId = e.pointerId;
+      stage.classList.add("is-dragging");
+      moveTo(e);
+    });
+    stage.addEventListener("pointermove", function (e) {
+      if (e.pointerId === dragId && (e.buttons & 1 || e.pointerType !== "mouse")) moveTo(e);
+    });
+    function endDrag(e) {
+      if (e.pointerId !== dragId) return;
+      dragId = null;
+      stage.classList.remove("is-dragging");
+    }
+    window.addEventListener("pointerup", endDrag);
+    window.addEventListener("pointercancel", endDrag);
+    if ("ResizeObserver" in window) new ResizeObserver(render).observe(cvNo);
+    else window.addEventListener("resize", render);
+
+    // Keyboard / native slider drag: move the divider; the zoom follows along the same row.
+    range.addEventListener("input", function () {
+      stage.style.setProperty("--pos", range.value + "%");
+      if (after.naturalWidth) {
+        cx = range.value / 100 * after.naturalWidth;
+        if (cy === null) cy = after.naturalHeight / 2;
+        render();
+      }
+    });
+
+    var dots = [];
+    for (var i = 0; i < N; i++) {
+      (function (p) {
+        var d = document.createElement("button");
+        d.type = "button";
+        d.className = "cmp-dot";
+        d.setAttribute("aria-label", "Example " + (p + 1) + " of " + N);
+        d.addEventListener("click", function () { show(p); });
+        dotsWrap.appendChild(d);
+        dots.push(d);
+      })(i);
+    }
+
+    function show(p) {
+      current = (p + N) % N;
+      loaded = 0;
+      after.src = FOLDER + "yes-" + EXAMPLES[current] + ".jpg";
+      before.src = FOLDER + "no-" + EXAMPLES[current] + ".jpg";
+      range.value = 50;
+      stage.style.setProperty("--pos", "50%");
+      stage.style.setProperty("--ky", "50%");
+      cx = cy = null;
+      count.textContent = (current + 1) + " / " + N;
+      dots.forEach(function (d, i) { d.classList.toggle("active", i === current); });
+      var n = EXAMPLES[(current + 1) % N];
+      new Image().src = FOLDER + "yes-" + n + ".jpg";
+      new Image().src = FOLDER + "no-" + n + ".jpg";
+    }
+
+    card.querySelectorAll("[data-step]").forEach(function (b) {
+      b.addEventListener("click", function () { show(current + Number(b.dataset.step)); });
+    });
+    card.addEventListener("keydown", function (e) {
+      if (e.target === range) return;
+      if (e.key === "ArrowLeft") { e.preventDefault(); show(current - 1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); show(current + 1); }
+    });
+
+    show(0);
+  })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script defer src="script.js"></script>
+<script defer src="mflow_demo.js"></script>
+</body>
+</html>
